@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build
+bin/
+obj/
+
+# NuGet
+*.nupkg
+packages/
+
+# Database
+*.mdf
+*.ldf
+
+# User secrets
+secrets.json
+appsettings.Development.json
