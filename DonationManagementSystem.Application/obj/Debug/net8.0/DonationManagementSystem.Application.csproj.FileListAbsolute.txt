@@ -13,3 +13,4 @@ C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Appli
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Application\obj\Debug\net8.0\refint\DonationManagementSystem.Application.dll
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Application\obj\Debug\net8.0\DonationManagementSystem.Application.pdb
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Application\obj\Debug\net8.0\ref\DonationManagementSystem.Application.dll
+C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Application\obj\Debug\net8.0\DonationManagementSystem.Application.sourcelink.json

@@ -16,13 +16,30 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
-})
+}).AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // MVC
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    // 1) Create Admin role if it doesn't exist
+    if (!await roleManager.RoleExistsAsync("Admin"))
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+
+    // 2) Promote a specific user to Admin (change this email)
+    var adminEmail = "jad_wb@hotmail.com";
+    var user = await userManager.FindByEmailAsync(adminEmail);
+
+    if (user != null && !await userManager.IsInRoleAsync(user, "Admin"))
+        await userManager.AddToRoleAsync(user, "Admin");
+}
 
 // Pipeline
 if (app.Environment.IsDevelopment())

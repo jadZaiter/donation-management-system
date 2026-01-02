@@ -9,3 +9,4 @@ C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domai
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domain\obj\Debug\net8.0\refint\DonationManagementSystem.Domain.dll
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.pdb
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domain\obj\Debug\net8.0\ref\DonationManagementSystem.Domain.dll
+C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.sourcelink.json

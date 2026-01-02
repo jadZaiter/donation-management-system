@@ -1,8 +1,101 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DonationManagementSystem.Web.ViewModels.HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home";
+
+    var f = Model.Featured;
+    var pct = (f == null || f.TargetAmount <= 0)
+        ? 0
+        : (int)Math.Min(100, Math.Round((double)(f.CollectedAmount / f.TargetAmount * 100)));
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (Model.Featured == null)
+{
+    <div class="alert alert-info">
+        No approved donation cases yet.
+    </div>
+}
+else
+{
+    <h2 class="mb-3">Featured Case</h2>
+
+    <div class="card mb-4 shadow">
+        <div class="card-body">
+            <h3 class="card-title">@f!.Title</h3>
+            <p class="card-text">@f.Description</p>
+
+            <div class="mb-2">
+                <strong>@f.CollectedAmount</strong> raised of
+                <strong>@f.TargetAmount</strong> @pct%
+
+                <div class="progress mt-2">
+                    <div class="progress-bar bg-success"
+                         role="progressbar"
+                         style="width:@pct%">
+                    </div>
+                </div>
+
+                <small class="text-muted">@f.DonorsCount donors</small>
+            </div>
+
+            <a class="btn btn-primary"
+               href="/DonationCases/Details/@f.Id">
+                View / Donate
+            </a>
+        </div>
+    </div>
+
+    <h2 class="mb-3">Other Cases</h2>
+
+    @if (!Model.Others.Any())
+    {
+        <p>No other cases right now.</p>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var c in Model.Others)
+            {
+                var pct2 = c.TargetAmount <= 0
+                ? 0
+                : (int)Math.Min(100, Math.Round((double)(c.CollectedAmount / c.TargetAmount * 100)));
+
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@c.Title</h5>
+
+                            <p class="card-text">
+                                @(c.Description.Length > 120
+                                                    ? c.Description.Substring(0, 120) + "..."
+                                                    : c.Description)
+                </p>
+
+                            <div class="mt-auto">
+                                <small>
+                                    <strong>@c.CollectedAmount</strong> /
+                                    <strong>@c.TargetAmount</strong> @pct2%
+                                </small>
+
+                                <div class="progress mt-1 mb-2">
+                                    <div class="progress-bar"
+                                         role="progressbar"
+                                         style="width:@pct2%">
+                                    </div>
+                                </div>
+
+                                <small class="text-muted">@c.DonorsCount donors</small>
+                                <br />
+
+                                <a class="btn btn-outline-primary btn-sm mt-2"
+                                   href="/DonationCases/Details/@c.Id">
+                                    View / Donate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        }
+        </div>
+    }
+}

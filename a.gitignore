@@ -1,0 +1,8 @@
+.vs/
+bin/
+obj/
+
+# Removed .vs files from tracking
+git rm -r --cached .vs
+git commit -m "Remove .vs files from tracking"
+   git push
