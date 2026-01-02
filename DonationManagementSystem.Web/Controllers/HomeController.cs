@@ -28,7 +28,9 @@ namespace DonationManagementSystem.Web.Controllers
                     TargetAmount = c.TargetAmount,
                     CreatedAt = c.CreatedAt,
                     CollectedAmount = c.Donations.Sum(d => (decimal?)d.Amount) ?? 0,
-                    DonorsCount = c.Donations.Select(d => d.UserId).Distinct().Count()
+                    DonorsCount = c.Donations.Select(d => d.UserId).Distinct().Count(),
+                    ImagePath = c.ImagePath
+
                 })
                 .ToListAsync();
 

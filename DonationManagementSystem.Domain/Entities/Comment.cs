@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DonationManagementSystem.Domain.Entities
 {
     public class Comment
     {
         public int Id { get; set; }
+        
 
         public int DonationCaseId { get; set; }
         public DonationCase? DonationCase { get; set; }
