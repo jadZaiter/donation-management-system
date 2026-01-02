@@ -17,3 +17,4 @@ C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Infra
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Infrastructure\obj\Debug\net8.0\DonationManagementSystem.Infrastructure.pdb
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Infrastructure\obj\Debug\net8.0\DonationManagementSystem.Infrastructure.genruntimeconfig.cache
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Infrastructure\obj\Debug\net8.0\ref\DonationManagementSystem.Infrastructure.dll
+C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Infrastructure\obj\Debug\net8.0\DonationManagementSystem.Infrastructure.sourcelink.json

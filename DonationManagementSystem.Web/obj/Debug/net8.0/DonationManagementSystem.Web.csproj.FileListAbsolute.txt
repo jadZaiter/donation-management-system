@@ -159,3 +159,4 @@ C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Web\o
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Web\obj\Debug\net8.0\DonationManagementSystem.Web.pdb
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Web\obj\Debug\net8.0\DonationManagementSystem.Web.genruntimeconfig.cache
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Web\obj\Debug\net8.0\ref\DonationManagementSystem.Web.dll
+C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Web\obj\Debug\net8.0\DonationManagementSystem.Web.sourcelink.json

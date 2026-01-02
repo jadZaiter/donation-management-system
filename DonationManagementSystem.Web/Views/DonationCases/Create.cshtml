@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Submit Donation Case";
+}
+
+<h2>Submit Donation Case</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input name="title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea name="description" class="form-control" rows="5"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Target Amount</label>
+        <input name="targetAmount" type="number" step="0.01" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>

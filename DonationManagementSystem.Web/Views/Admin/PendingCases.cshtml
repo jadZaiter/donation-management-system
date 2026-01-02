@@ -1,0 +1,50 @@
+﻿@model List<DonationManagementSystem.Domain.Entities.DonationCase>
+
+@{
+    ViewData["Title"] = "Pending Donation Cases";
+}
+
+<h2>Pending Donation Cases</h2>
+
+@if (!Model.Any())
+{
+    <p>No pending cases.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Target</th>
+                <th>Created At</th>
+                <th>Submitted By</th>
+                <th style="width:220px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.TargetAmount</td>
+                    <td>@item.CreatedAt</td>
+                    <td>@item.CreatedByUserId</td>
+                    <td>
+                        <form asp-action="Approve" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="btn btn-success btn-sm">Approve</button>
+                        </form>
+
+                        <form asp-action="Reject" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
