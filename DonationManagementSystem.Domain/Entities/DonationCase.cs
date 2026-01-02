@@ -26,7 +26,7 @@ namespace DonationManagementSystem.Domain.Entities
         public CaseStatus Status { get; set; } = CaseStatus.Pending;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
+        public string? ImagePath { get; set; }
         // who submitted it (Identity user id)
         public string CreatedByUserId { get; set; } = string.Empty;
 
