@@ -28,6 +28,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGVuZGluZ0Nhc2VzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PC/source/repos/DonationManagementSystem/DonationManagementSystem.Web/Views/Admin/PendingPayments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGVuZGluZ1BheW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/source/repos/DonationManagementSystem/DonationManagementSystem.Web/Views/Admin/ReviewedCases.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmV2aWV3ZWRDYXNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PC/source/repos/DonationManagementSystem/DonationManagementSystem.Web/Views/DonationCases/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYXRpb25DYXNlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,6 +46,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/PC/source/repos/DonationManagementSystem/DonationManagementSystem.Web/Views/DonationCases/MyCases.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYXRpb25DYXNlc1xNeUNhc2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/source/repos/DonationManagementSystem/DonationManagementSystem.Web/Views/DonationCases/MyPayments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYXRpb25DYXNlc1xNeVBheW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/source/repos/DonationManagementSystem/DonationManagementSystem.Web/Views/DonationCases/UploadProof.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYXRpb25DYXNlc1xVcGxvYWRQcm9vZi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PC/source/repos/DonationManagementSystem/DonationManagementSystem.Web/Views/Donations/MyDonations.cshtml]

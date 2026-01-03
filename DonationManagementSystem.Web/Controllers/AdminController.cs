@@ -1,5 +1,9 @@
-﻿using DonationManagementSystem.Infrastructure.Data;
+﻿using DonationManagementSystem.Application.DonationCases;
+using DonationManagementSystem.Application.DonationCases.Models;
+using DonationManagementSystem.Application.Payments;
+using DonationManagementSystem.Application.Payments.Models;
 using DonationManagementSystem.Domain.Entities;
+using DonationManagementSystem.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +14,20 @@ namespace DonationManagementSystem.Web.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly PaymentWorkflow _paymentWorkflow;
+        private readonly DonationCaseWorkflow _caseWorkflow;
 
-        public AdminController(ApplicationDbContext db)
+        public AdminController(
+            ApplicationDbContext db,
+            PaymentWorkflow paymentWorkflow,
+            DonationCaseWorkflow caseWorkflow)
         {
             _db = db;
+            _paymentWorkflow = paymentWorkflow;
+            _caseWorkflow = caseWorkflow;
         }
 
-        // List pending cases
+        // ✅ List pending cases (listing only; OK to stay in Web for now)
         public async Task<IActionResult> PendingCases()
         {
             var cases = await _db.DonationCases
@@ -27,32 +38,87 @@ namespace DonationManagementSystem.Web.Controllers
             return View(cases);
         }
 
-        // Approve
+        // ✅ Approve case (moved to Application)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Approve(int id)
+        public async Task<IActionResult> Approve(int id, string? note)
         {
-            var donationCase = await _db.DonationCases.FindAsync(id);
-            if (donationCase == null) return NotFound();
+            var adminId = User.Identity?.Name ?? "admin";
 
-            donationCase.Status = CaseStatus.Approved;
-            await _db.SaveChangesAsync();
+            await _caseWorkflow.ApproveAsync(new ReviewDonationCaseRequest
+            {
+                CaseId = id,
+                AdminId = adminId,
+                Note = note
+            });
 
             return RedirectToAction(nameof(PendingCases));
         }
 
-        // Reject
+        // ✅ Reject case (moved to Application)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reject(int id)
+        public async Task<IActionResult> Reject(int id, string? note)
         {
-            var donationCase = await _db.DonationCases.FindAsync(id);
-            if (donationCase == null) return NotFound();
+            var adminId = User.Identity?.Name ?? "admin";
 
-            donationCase.Status = CaseStatus.Rejected;
-            await _db.SaveChangesAsync();
+            await _caseWorkflow.RejectAsync(new ReviewDonationCaseRequest
+            {
+                CaseId = id,
+                AdminId = adminId,
+                Note = note
+            });
 
             return RedirectToAction(nameof(PendingCases));
         }
+
+        // ✅ Payments review (ProofUploaded)
+        public async Task<IActionResult> PendingPayments()
+        {
+            var list = await _paymentWorkflow.GetPendingReviewAsync();
+            return View(list);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApprovePayment(int paymentId, string? note)
+        {
+            var adminId = User.Identity?.Name ?? "admin";
+
+            await _paymentWorkflow.ApproveAsync(new ReviewPaymentRequest
+            {
+                PaymentId = paymentId,
+                AdminId = adminId,
+                Note = note
+            });
+
+            return RedirectToAction(nameof(PendingPayments));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectPayment(int paymentId, string? note)
+        {
+            var adminId = User.Identity?.Name ?? "admin";
+
+            await _paymentWorkflow.RejectAsync(new ReviewPaymentRequest
+            {
+                PaymentId = paymentId,
+                AdminId = adminId,
+                Note = note
+            });
+
+            return RedirectToAction(nameof(PendingPayments));
+        }
+        public async Task<IActionResult> ReviewedCases()
+        {
+            var cases = await _db.DonationCases
+                .Where(c => c.Status == CaseStatus.Approved || c.Status == CaseStatus.Rejected)
+                .OrderByDescending(c => c.ReviewedAt)
+                .ToListAsync();
+
+            return View(cases);
+        }
+
     }
 }

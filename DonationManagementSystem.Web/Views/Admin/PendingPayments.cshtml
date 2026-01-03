@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@using DonationManagementSystem.Domain.Entities
+
+
+@model List<DonationManagementSystem.Domain.Entities.Payment>
+
+<h2>Pending Payment Verifications</h2>
+
+@if (!Model.Any())
+{
+    <p>No payments waiting for review.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Case</th>
+                <th>UserId</th>
+                <th>Amount</th>
+                <th>Proof</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                var user = await UserManager.FindByIdAsync(p.UserId);
+                var email = user?.Email ?? "anonymous";
+                var username = email.Contains("@") ? email.Split('@')[0] : email;
+
+                <tr>
+                    <td>@p.DonationCase?.Title</td>
+                    <td>@username</td>
+                    <td>@p.Amount</td>
+                    @{
+                        var badge = p.Status switch
+                        {
+                            PaymentStatus.Pending => "bg-secondary",
+                            PaymentStatus.ProofUploaded => "bg-warning text-dark",
+                            PaymentStatus.Approved => "bg-success",
+                            PaymentStatus.Rejected => "bg-danger",
+                            _ => "bg-secondary"
+                        };
+                    }
+                    <td>
+                        <span class="badge @badge">@p.Status</span>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(p.ProofPath))
+                        {
+                            <a href="@p.ProofPath" target="_blank">Open Proof</a>
+                        }
+                    </td>
+                    <td>
+                        <form asp-action="ApprovePayment" method="post" style="display:inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="paymentId" value="@p.Id" />
+                            <input type="text" name="note" class="form-control form-control-sm mb-1" placeholder="Admin note (optional)" />
+                            <button class="btn btn-success btn-sm">Approve</button>
+                        </form>
+
+                        <form asp-action="RejectPayment" method="post" style="display:inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="paymentId" value="@p.Id" />
+                            <input type="text" name="note" class="form-control form-control-sm mb-1" placeholder="Admin note (optional)" />
+                            <button class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

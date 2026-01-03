@@ -16,6 +16,8 @@ namespace DonationManagementSystem.Infrastructure.Data
         public DbSet<DonationCase> DonationCases => Set<DonationCase>();
         public DbSet<Donation> Donations => Set<Donation>();
         public DbSet<Comment> Comments => Set<Comment>();
+        public DbSet<Payment> Payments => Set<Payment>();
+
         // Later:
         // public DbSet<Donation> Donations { get; set; }
     }

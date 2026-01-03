@@ -7,10 +7,41 @@
 
     var collected = Model.Donations.Sum(d => d.Amount);
     var pct = Model.TargetAmount <= 0 ? 0 : (int)Math.Min(100, Math.Round((double)(collected / Model.TargetAmount * 100)));
+    var isClosed = collected >= Model.TargetAmount;
 }
 
 <h2>@Model.Title</h2>
+@if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+{
+    <a href="@Model.ImagePath" target="_blank">
+        <img src="@Model.ImagePath"
+             class="img-fluid rounded mb-3"
+             style="max-height: 420px; object-fit: cover; width: 100%; cursor: zoom-in;" />
+    </a>
+}
+else
+{
+    <div class="text-muted mb-3">No image provided.</div>
+}
+<small class="text-muted">Click image to view full size</small>
+
 <p>@Model.Description</p>
+@if (Model.Status == DonationManagementSystem.Domain.Entities.CaseStatus.Approved)
+{
+    <div class="alert alert-info">
+        <strong>Verified by admin</strong>
+        @if (Model.ReviewedAt != null)
+        {
+            <span>on @Model.ReviewedAt.Value.ToString("yyyy-MM-dd HH:mm")</span>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.AdminNote))
+        {
+            <div class="mt-2"><strong>Note:</strong> @Model.AdminNote</div>
+        }
+    </div>
+}
+
 
 <hr />
 
@@ -43,7 +74,16 @@
             <input class="form-control" type="number" name="amount" step="0.01" min="1" required />
         </div>
 
-        <button class="btn btn-success">Donate</button>
+        <button class="btn btn-primary" @(isClosed ? "disabled" : "")>
+            Donate
+        </button>
+
+        @if (isClosed)
+        {
+            <div class="alert alert-success mt-2">
+                Target reached. Donations are closed.
+            </div>
+        }
     </form>
     <hr />
 
