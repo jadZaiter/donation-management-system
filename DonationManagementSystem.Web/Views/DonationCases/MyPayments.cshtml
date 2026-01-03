@@ -2,7 +2,6 @@
 @inject UserManager<IdentityUser> UserManager
 @using DonationManagementSystem.Domain.Entities
 
-
 @model List<DonationManagementSystem.Domain.Entities.Payment>
 
 <h2>My Payments</h2>
@@ -21,33 +20,49 @@ else
                 <th>Status</th>
                 <th>Proof</th>
                 <th>Created</th>
-                <th>User</th>
+                <th>Reviewed</th>
+                <th>Admin Note</th>
             </tr>
         </thead>
+
         <tbody>
             @foreach (var p in Model)
             {
-                var user = await UserManager.FindByIdAsync(p.UserId);
-                var email = user?.Email ?? "anonymous";
-                var username = email.Contains("@") ? email.Split('@')[0] : email;
+                // Status badge
+                var badge = p.Status switch
+                {
+                    PaymentStatus.Pending => "bg-secondary",
+                    PaymentStatus.ProofUploaded => "bg-warning text-dark",
+                    PaymentStatus.Approved => "bg-success",
+                    PaymentStatus.Rejected => "bg-danger",
+                    _ => "bg-secondary"
+                };
+
+                // Reviewed info
+                string reviewerName = "—";
+                if (!string.IsNullOrWhiteSpace(p.ReviewedByUserId))
+                {
+                    var reviewer = await UserManager.FindByIdAsync(p.ReviewedByUserId);
+                    var reviewerEmail = reviewer?.Email;
+
+                    if (!string.IsNullOrWhiteSpace(reviewerEmail))
+                        reviewerName = reviewerEmail.Contains("@") ? reviewerEmail.Split('@')[0] : reviewerEmail;
+                    else
+                        reviewerName = "Admin";
+                }
+
+                var reviewedText = p.ReviewedAt.HasValue
+                ? $"{reviewerName} • {p.ReviewedAt.Value:yyyy-MM-dd HH:mm}"
+                : "Not reviewed yet";
 
                 <tr>
-                    <td>@p.DonationCase?.Title</td>
+                    <td>@(p.DonationCase?.Title ?? "—")</td>
                     <td>@p.Amount</td>
-                    @{
-                        var badge = p.Status switch
-                        {
-                            PaymentStatus.Pending => "bg-secondary",
-                            PaymentStatus.ProofUploaded => "bg-warning text-dark",
-                            PaymentStatus.Approved => "bg-success",
-                            PaymentStatus.Rejected => "bg-danger",
-                            _ => "bg-secondary"
-                        };
-                    }
+
                     <td>
                         <span class="badge @badge">@p.Status</span>
                     </td>
-                    <td>@username</td>
+
                     <td>
                         @if (!string.IsNullOrEmpty(p.ProofPath))
                         {
@@ -58,10 +73,12 @@ else
                             <span class="text-muted">No proof</span>
                         }
                     </td>
-                    <td>@p.CreatedAt</td>
+
+                    <td>@p.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@reviewedText</td>
+                    <td>@(string.IsNullOrWhiteSpace(p.AdminNote) ? "—" : p.AdminNote)</td>
                 </tr>
             }
-
         </tbody>
     </table>
 }
