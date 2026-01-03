@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Upload Payment Proof";
+    var paymentId = (int)ViewBag.PaymentId;
+}
+
+<h2>Upload Payment Proof</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="paymentId" value="@paymentId" />
+
+    <div class="mb-3">
+        <label class="form-label">Proof Image (jpg/png)</label>
+        <input type="file" name="proofFile" class="form-control" accept="image/*" required />
+    </div>
+
+    <button class="btn btn-primary">Upload</button>
+</form>

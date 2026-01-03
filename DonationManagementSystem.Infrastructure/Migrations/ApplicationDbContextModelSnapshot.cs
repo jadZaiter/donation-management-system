@@ -87,6 +87,9 @@ namespace DonationManagementSystem.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AdminNote")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -99,6 +102,12 @@ namespace DonationManagementSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReviewedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewedByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -114,6 +123,52 @@ namespace DonationManagementSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DonationCases");
+                });
+
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AdminNote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DonationCaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Method")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProofPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReviewedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewedByUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DonationCaseId");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -333,6 +388,17 @@ namespace DonationManagementSystem.Infrastructure.Migrations
                 {
                     b.HasOne("DonationManagementSystem.Domain.Entities.DonationCase", "DonationCase")
                         .WithMany("Donations")
+                        .HasForeignKey("DonationCaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DonationCase");
+                });
+
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Payment", b =>
+                {
+                    b.HasOne("DonationManagementSystem.Domain.Entities.DonationCase", "DonationCase")
+                        .WithMany()
                         .HasForeignKey("DonationCaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

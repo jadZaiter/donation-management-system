@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@using DonationManagementSystem.Domain.Entities
+@model List<DonationManagementSystem.Domain.Entities.DonationCase>
+
+@{
+    ViewData["Title"] = "Reviewed Cases";
+}
+
+<h2>Reviewed Cases</h2>
+
+@if (!Model.Any())
+{
+    <p>No reviewed cases yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Submitted By</th>
+                <th>Reviewed By</th>
+                <th>Reviewed At</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var submitUser = await UserManager.FindByIdAsync(item.CreatedByUserId);
+                var submitEmail = submitUser?.Email ?? "unknown";
+                var submitName = submitEmail.Contains("@") ? submitEmail.Split('@')[0] : submitEmail;
+
+                var reviewerName = "—";
+                if (!string.IsNullOrEmpty(item.ReviewedByUserId))
+                {
+                    var reviewer = await UserManager.FindByIdAsync(item.ReviewedByUserId);
+                    var reviewerEmail = reviewer?.Email ?? item.ReviewedByUserId;
+                    reviewerName = reviewerEmail.Contains("@") ? reviewerEmail.Split('@')[0] : reviewerEmail;
+                }
+
+                var badge = item.Status switch
+                {
+                    CaseStatus.Approved => "bg-success",
+                    CaseStatus.Rejected => "bg-danger",
+                    _ => "bg-secondary"
+                };
+
+                <tr>
+                    <td>
+                        <a asp-controller="DonationCases" asp-action="Details" asp-route-id="@item.Id">
+                            @item.Title
+                        </a>
+                    </td>
+                    <td><span class="badge @badge">@item.Status</span></td>
+                    <td>@submitName</td>
+                    <td>@reviewerName</td>
+                    <td>@(item.ReviewedAt?.ToString("yyyy-MM-dd HH:mm") ?? "—")</td>
+                    <td>@(string.IsNullOrWhiteSpace(item.AdminNote) ? "—" : item.AdminNote)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

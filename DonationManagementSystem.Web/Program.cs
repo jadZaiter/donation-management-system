@@ -1,6 +1,10 @@
 using DonationManagementSystem.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DonationManagementSystem.Application.Payments;
+using DonationManagementSystem.Infrastructure.Services;
+using DonationManagementSystem.Application.DonationCases;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +25,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 // MVC
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<PaymentWorkflow>();
+
+
+builder.Services.AddScoped<IDonationCaseService, DonationCaseService>();
+builder.Services.AddScoped<DonationCaseWorkflow>();
 
 var app = builder.Build();
 

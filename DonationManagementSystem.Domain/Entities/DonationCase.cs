@@ -29,6 +29,10 @@ namespace DonationManagementSystem.Domain.Entities
         public string? ImagePath { get; set; }
         // who submitted it (Identity user id)
         public string CreatedByUserId { get; set; } = string.Empty;
+        public string? ReviewedByUserId { get; set; }
+        public DateTime? ReviewedAt { get; set; }
+        public string? AdminNote { get; set; }
+
 
         // Navigation
         public ICollection<Donation> Donations { get; set; } = new List<Donation>();

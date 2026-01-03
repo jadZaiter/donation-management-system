@@ -1,4 +1,7 @@
-﻿@model List<DonationManagementSystem.Domain.Entities.DonationCase>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@model List<DonationManagementSystem.Domain.Entities.DonationCase>
 
 @{
     ViewData["Title"] = "Pending Donation Cases";
@@ -19,28 +22,42 @@ else
                 <th>Target</th>
                 <th>Created At</th>
                 <th>Submitted By</th>
-                <th style="width:220px;">Actions</th>
+                <th style="width:260px;">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
+                var user = await UserManager.FindByIdAsync(item.CreatedByUserId);
+                var email = user?.Email ?? "unknown";
+                var username = email.Contains("@") ? email.Split('@')[0] : email;
+
                 <tr>
                     <td>@item.Title</td>
                     <td>@item.TargetAmount</td>
                     <td>@item.CreatedAt</td>
-                    <td>@item.CreatedByUserId</td>
+                    <td>@username</td>
                     <td>
-                        <form asp-action="Approve" method="post" style="display:inline;">
+                        <!-- Approve -->
+                        <form asp-action="Approve" method="post" class="mb-1">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="id" value="@item.Id" />
-                            <button class="btn btn-success btn-sm">Approve</button>
+                            <input type="text"
+                                   name="note"
+                                   class="form-control form-control-sm mb-1"
+                                   placeholder="Admin note (optional)" />
+                            <button class="btn btn-success btn-sm w-100">Approve</button>
                         </form>
 
-                        <form asp-action="Reject" method="post" style="display:inline;">
+                        <!-- Reject -->
+                        <form asp-action="Reject" method="post">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="id" value="@item.Id" />
-                            <button class="btn btn-danger btn-sm">Reject</button>
+                            <input type="text"
+                                   name="note"
+                                   class="form-control form-control-sm mb-1"
+                                   placeholder="Admin note (optional)" />
+                            <button class="btn btn-danger btn-sm w-100">Reject</button>
                         </form>
                     </td>
                 </tr>
