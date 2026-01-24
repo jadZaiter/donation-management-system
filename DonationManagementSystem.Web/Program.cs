@@ -87,7 +87,9 @@ using (var scope = app.Services.CreateScope())
 
     // 1) Create Admin role if it doesn't exist
     if (!await roleManager.RoleExistsAsync("Admin"))
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    
+    await roleManager.CreateAsync(new IdentityRole("Admin"));
+    
 
     // 2) Promote a specific user to Admin (change this email)
     var adminEmail = "jad_wb@hotmail.com";

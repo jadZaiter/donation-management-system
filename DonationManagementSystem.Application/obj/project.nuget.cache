@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E1E2qn3D58o=",
+  "dgSpecHash": "yVUci3WhVjU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\serilog\\4.3.0\\serilog.4.3.0.nupkg.sha512"
   ],

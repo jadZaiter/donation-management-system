@@ -1,0 +1,96 @@
+﻿@model DonationManagementSystem.Web.ViewModels.Dashboard.AdminDashboardVm
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+
+<div class="row mb-4">
+    <div class="col-md-3 mb-2">
+        <div class="card p-3">
+            <div class="text-muted">Pending Cases</div>
+            <h3>@Model.PendingCasesCount</h3>
+            <a class="btn btn-sm btn-outline-primary mt-2" href="/Admin/PendingCases">Open</a>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-2">
+        <div class="card p-3">
+            <div class="text-muted">Pending Payments</div>
+            <h3>@Model.PendingPaymentsCount</h3>
+            <a class="btn btn-sm btn-outline-primary mt-2" href="/Admin/PendingPayments">Open</a>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-2">
+        <div class="card p-3">
+            <div class="text-muted">Cases (Approved/Rejected)</div>
+            <h5>@Model.ApprovedCasesCount / @Model.RejectedCasesCount</h5>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-2">
+        <div class="card p-3">
+            <div class="text-muted">Total Approved Donations</div>
+            <h3>@Model.TotalApprovedDonations</h3>
+        </div>
+    </div>
+</div>
+
+<h4>Latest Pending Cases</h4>
+@if (!Model.LatestPendingCases.Any())
+{
+    <p class="text-muted">No pending cases.</p>
+}
+else
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Target</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model.LatestPendingCases)
+            {
+                <tr>
+                    <td>@c.Title</td>
+                    <td>@c.TargetAmount</td>
+                    <td>@c.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h4 class="mt-4">Latest Pending Payments</h4>
+@if (!Model.LatestPendingPayments.Any())
+{
+    <p class="text-muted">No pending payments.</p>
+}
+else
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Case</th>
+                <th>Amount</th>
+                <th>UserId</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.LatestPendingPayments)
+            {
+                <tr>
+                    <td>@p.DonationCase?.Title</td>
+                    <td>@p.Amount</td>
+                    <td>@p.UserId</td>
+                    <td>@p.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

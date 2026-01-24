@@ -1,96 +1,147 @@
-﻿@model DonationManagementSystem.Web.ViewModels.Dashboard.AdminDashboardVm
+@model DonationManagementSystem.Web.ViewModels.Dashboard.AdminDashboardVm
 @{
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<h2>Admin Dashboard</h2>
+<div class="mb-4">
+    <h2>Admin Dashboard</h2>
+    <p class="text-muted">System overview and management</p>
+</div>
 
-<div class="row mb-4">
-    <div class="col-md-3 mb-2">
-        <div class="card p-3">
-            <div class="text-muted">Pending Cases</div>
-            <h3>@Model.PendingCasesCount</h3>
-            <a class="btn btn-sm btn-outline-primary mt-2" href="/Admin/PendingCases">Open</a>
+<div class="row mb-5 g-4">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <p class="text-muted mb-1">Pending Cases</p>
+                        <h3 class="mb-0">@Model.PendingCasesCount</h3>
+                    </div>
+                    <span style="font-size: 2rem;">?</span>
+                </div>
+                <a class="btn btn-sm btn-outline-primary mt-2 w-100" href="/Admin/PendingCases">Review Now</a>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-3 mb-2">
-        <div class="card p-3">
-            <div class="text-muted">Pending Payments</div>
-            <h3>@Model.PendingPaymentsCount</h3>
-            <a class="btn btn-sm btn-outline-primary mt-2" href="/Admin/PendingPayments">Open</a>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <p class="text-muted mb-1">Pending Payments</p>
+                        <h3 class="mb-0">@Model.PendingPaymentsCount</h3>
+                    </div>
+                    <span style="font-size: 2rem;">??</span>
+                </div>
+                <a class="btn btn-sm btn-outline-primary mt-2 w-100" href="/Admin/PendingPayments">Review Now</a>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-3 mb-2">
-        <div class="card p-3">
-            <div class="text-muted">Cases (Approved/Rejected)</div>
-            <h5>@Model.ApprovedCasesCount / @Model.RejectedCasesCount</h5>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <p class="text-muted mb-1">Case Status</p>
+                    <div class="mb-2">
+                        <span class="badge bg-success">@Model.ApprovedCasesCount approved</span>
+                    </div>
+                    <span class="badge bg-danger">@Model.RejectedCasesCount rejected</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-3 mb-2">
-        <div class="card p-3">
-            <div class="text-muted">Total Approved Donations</div>
-            <h3>@Model.TotalApprovedDonations</h3>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">Total Approved</p>
+                        <h3 class="mb-0 text-success">@Model.TotalApprovedDonations</h3>
+                    </div>
+                    <span style="font-size: 2rem;">?</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<h4>Latest Pending Cases</h4>
-@if (!Model.LatestPendingCases.Any())
-{
-    <p class="text-muted">No pending cases.</p>
-}
-else
-{
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Target</th>
-                <th>Created</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var c in Model.LatestPendingCases)
-            {
-                <tr>
-                    <td>@c.Title</td>
-                    <td>@c.TargetAmount</td>
-                    <td>@c.CreatedAt</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Latest Pending Cases</h5>
+                @if (!Model.LatestPendingCases.Any())
+                {
+                    <p class="text-muted">No pending cases.</p>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Target</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var c in Model.LatestPendingCases)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@(c.Title.Length > 25 ? c.Title.Substring(0, 25) + "..." : c.Title)</strong>
+                                        </td>
+                                        <td>@c.TargetAmount.ToString("C")</td>
+                                        <td><small>@c.CreatedAt.ToString("yyyy-MM-dd")</small></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 
-<h4 class="mt-4">Latest Pending Payments</h4>
-@if (!Model.LatestPendingPayments.Any())
-{
-    <p class="text-muted">No pending payments.</p>
-}
-else
-{
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th>Case</th>
-                <th>Amount</th>
-                <th>UserId</th>
-                <th>Created</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var p in Model.LatestPendingPayments)
-            {
-                <tr>
-                    <td>@p.DonationCase?.Title</td>
-                    <td>@p.Amount</td>
-                    <td>@p.UserId</td>
-                    <td>@p.CreatedAt</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Latest Pending Payments</h5>
+                @if (!Model.LatestPendingPayments.Any())
+                {
+                    <p class="text-muted">No pending payments.</p>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Case</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.LatestPendingPayments)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@(p.DonationCase?.Title != null && p.DonationCase.Title.Length > 25 ? p.DonationCase.Title.Substring(0, 25) + "..." : p.DonationCase?.Title)</strong>
+                                        </td>
+                                        <td>@p.Amount.ToString("C")</td>
+                                        <td><small>@p.CreatedAt.ToString("yyyy-MM-dd")</small></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

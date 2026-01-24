@@ -10,3 +10,27 @@ C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domai
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.pdb
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domain\obj\Debug\net8.0\ref\DonationManagementSystem.Domain.dll
 C:\Users\PC\source\repos\DonationManagementSystem\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.sourcelink.json
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\bin\Debug\net8.0\DonationManagementSystem.Domain.deps.json
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\bin\Debug\net8.0\DonationManagementSystem.Domain.dll
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\bin\Debug\net8.0\DonationManagementSystem.Domain.pdb
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.AssemblyInfo.cs
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.sourcelink.json
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.dll
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\refint\DonationManagementSystem.Domain.dll
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.pdb
+C:\Users\user\Desktop\DMScode\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\ref\DonationManagementSystem.Domain.dll
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\bin\Debug\net8.0\DonationManagementSystem.Domain.deps.json
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\bin\Debug\net8.0\DonationManagementSystem.Domain.dll
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\bin\Debug\net8.0\DonationManagementSystem.Domain.pdb
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.AssemblyInfo.cs
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.sourcelink.json
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.dll
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\refint\DonationManagementSystem.Domain.dll
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\DonationManagementSystem.Domain.pdb
+C:\Users\PC\Desktop\New folder (5)\donation-management-system\DonationManagementSystem.Domain\obj\Debug\net8.0\ref\DonationManagementSystem.Domain.dll
