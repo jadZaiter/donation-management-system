@@ -215,6 +215,18 @@ The project is structured into \*\*4 main layers\*\*, each with a clear responsi
 ```bash
 
 git clone https://github.com/jadZaiter/donation-management-system.git
+2️⃣ Open the solution in Visual Studio
 
+3️⃣ Update database connection string in:
+
+appsettings.json
+
+
+4️⃣ Apply database migrations:
+
+Update-Database -Context ApplicationDbContext
+
+
+5️⃣ Run the project (F5)
 
 
