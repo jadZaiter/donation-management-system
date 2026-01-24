@@ -13,11 +13,20 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.22" />
+    <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DonationManagementSystem.Application\DonationManagementSystem.Application.csproj" />
     <ProjectReference Include="..\DonationManagementSystem.Infrastructure\DonationManagementSystem.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="hubs\admin\" />
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

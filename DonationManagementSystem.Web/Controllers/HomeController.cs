@@ -18,6 +18,7 @@ namespace DonationManagementSystem.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var approved = await _db.DonationCases
+                .AsNoTracking()
                 .Where(c => c.Status == CaseStatus.Approved)
                 .OrderByDescending(c => c.CreatedAt)
                 .Select(c => new DonationCaseCardVm
@@ -27,10 +28,17 @@ namespace DonationManagementSystem.Web.Controllers
                     Description = c.Description,
                     TargetAmount = c.TargetAmount,
                     CreatedAt = c.CreatedAt,
-                    CollectedAmount = c.Donations.Sum(d => (decimal?)d.Amount) ?? 0,
-                    DonorsCount = c.Donations.Select(d => d.UserId).Distinct().Count(),
-                    ImagePath = c.ImagePath
+                    ImagePath = c.ImagePath,
 
+                    CollectedAmount = _db.Donations
+                        .Where(d => d.DonationCaseId == c.Id)
+                        .Sum(d => (decimal?)d.Amount) ?? 0m,
+
+                    DonorsCount = _db.Donations
+                        .Where(d => d.DonationCaseId == c.Id)
+                        .Select(d => d.UserId)
+                        .Distinct()
+                        .Count()
                 })
                 .ToListAsync();
 
@@ -42,5 +50,6 @@ namespace DonationManagementSystem.Web.Controllers
 
             return View(vm);
         }
+
     }
 }

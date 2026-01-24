@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using DonationManagementSystem.Application.DonationCases.Models;
 using DonationManagementSystem.Domain.Entities;
+using Serilog;
 
 
 
@@ -33,6 +33,8 @@ namespace DonationManagementSystem.Application.DonationCases
             donationCase.ReviewedByUserId = req.AdminId;
             donationCase.ReviewedAt = DateTime.UtcNow;
             donationCase.AdminNote = req.Note;
+            Log.Information("Donation case approved. CaseId: {CaseId}, AdminId: {AdminId}",
+    req.CaseId, req.AdminId);
 
             await _cases.SaveAsync();
         }
@@ -47,6 +49,8 @@ namespace DonationManagementSystem.Application.DonationCases
             donationCase.ReviewedByUserId = req.AdminId;
             donationCase.ReviewedAt = DateTime.UtcNow;
             donationCase.AdminNote = req.Note;
+            Log.Warning("Donation case rejected. CaseId: {CaseId}, AdminId: {AdminId}, Note: {Note}",
+    req.CaseId, req.AdminId, req.Note);
 
             await _cases.SaveAsync();
         }

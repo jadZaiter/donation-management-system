@@ -23,6 +23,7 @@ namespace DonationManagementSystem.Web.Controllers
             var userId = _userManager.GetUserId(User);
 
             var donations = await _db.Donations
+                .AsNoTracking()
                 .Include(d => d.DonationCase)
                 .Where(d => d.UserId == userId)
                 .OrderByDescending(d => d.DonatedAt)

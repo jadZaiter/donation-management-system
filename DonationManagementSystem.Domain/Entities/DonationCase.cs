@@ -12,7 +12,8 @@ namespace DonationManagementSystem.Domain.Entities
     {
         Pending = 0,
         Approved = 1,
-        Rejected = 2
+        Rejected = 2,
+        Completed = 3
     }
     public class DonationCase
     {
@@ -32,7 +33,7 @@ namespace DonationManagementSystem.Domain.Entities
         public string? ReviewedByUserId { get; set; }
         public DateTime? ReviewedAt { get; set; }
         public string? AdminNote { get; set; }
-
+   
 
         // Navigation
         public ICollection<Donation> Donations { get; set; } = new List<Donation>();

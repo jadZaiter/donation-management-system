@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "ContainingType": "DonationManagementSystem.Web.Controllers.Api.DonationCasesApiController",
+    "Method": "GetApprovedCases",
+    "RelativePath": "api/donation-cases",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DonationManagementSystem.Web.Controllers.Api.DonationCasesApiController",
+    "Method": "GetCaseDetails",
+    "RelativePath": "api/donation-cases/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DonationManagementSystem.Web.Controllers.Api.PaymentsApiController",
+    "Method": "Approve",
+    "RelativePath": "api/payments/{paymentId}/approve",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "DonationManagementSystem.Web.Controllers.Api.ReviewApiRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DonationManagementSystem.Web.Controllers.Api.PaymentsApiController",
+    "Method": "UploadProof",
+    "RelativePath": "api/payments/{paymentId}/proof",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "DonationManagementSystem.Web.Controllers.Api.UploadProofApiRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DonationManagementSystem.Web.Controllers.Api.PaymentsApiController",
+    "Method": "Reject",
+    "RelativePath": "api/payments/{paymentId}/reject",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "DonationManagementSystem.Web.Controllers.Api.ReviewApiRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DonationManagementSystem.Web.Controllers.Api.PaymentsApiController",
+    "Method": "Start",
+    "RelativePath": "api/payments/start",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "DonationManagementSystem.Web.Controllers.Api.StartPaymentApiRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
