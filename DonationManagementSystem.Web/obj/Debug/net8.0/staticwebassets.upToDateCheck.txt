@@ -64,7 +64,10 @@ wwwroot\uploads\cases\4a956ca1-6687-4193-8227-50f3b981afca.png
 wwwroot\uploads\cases\8687f313-d634-4252-8bbe-b6cc5629c5e5.png
 wwwroot\uploads\cases\d8dd81b9-3bc6-4df7-9d11-6ab085df46ec.png
 wwwroot\uploads\proofs\0d0a6bd6-7b5e-4cef-9d44-97e2993e3530.png
+wwwroot\uploads\proofs\4bfbee17-e24d-4ccc-b581-34a9b09c8fc0.png
 wwwroot\uploads\proofs\808fa01b-0f13-4c4f-90e0-1b25425c7239.png
 wwwroot\uploads\proofs\cb13aa41-c7fd-4cbf-bb98-90c7bd44f9c8.png
 wwwroot\uploads\proofs\d1905182-1761-4ea3-85bd-1d7f85083722.png
+wwwroot\uploads\proofs\d42350f1-9bb4-4c11-83aa-f0ab066fa292.png
+wwwroot\uploads\proofs\f62ec95e-abc6-463a-b5ee-7201596880aa.png
 wwwroot\uploads\proofs\fc5d6122-af1b-4997-8d05-b15fab5f61a8.png

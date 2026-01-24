@@ -7,6 +7,8 @@ using DonationManagementSystem.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace DonationManagementSystem.Web.Controllers
 {
@@ -16,15 +18,18 @@ namespace DonationManagementSystem.Web.Controllers
         private readonly ApplicationDbContext _db;
         private readonly PaymentWorkflow _paymentWorkflow;
         private readonly DonationCaseWorkflow _caseWorkflow;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public AdminController(
             ApplicationDbContext db,
             PaymentWorkflow paymentWorkflow,
-            DonationCaseWorkflow caseWorkflow)
+            DonationCaseWorkflow caseWorkflow,
+            UserManager<IdentityUser> userManager)
         {
             _db = db;
             _paymentWorkflow = paymentWorkflow;
             _caseWorkflow = caseWorkflow;
+            _userManager = userManager;
         }
 
         // ✅ List pending cases (listing only; OK to stay in Web for now)
@@ -43,7 +48,8 @@ namespace DonationManagementSystem.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(int id, string? note)
         {
-            var adminId = User.Identity?.Name ?? "admin";
+            var adminId = _userManager.GetUserId(User) ?? "admin";
+
 
             await _caseWorkflow.ApproveAsync(new ReviewDonationCaseRequest
             {
@@ -60,7 +66,8 @@ namespace DonationManagementSystem.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reject(int id, string? note)
         {
-            var adminId = User.Identity?.Name ?? "admin";
+            var adminId = _userManager.GetUserId(User) ?? "admin";
+
 
             await _caseWorkflow.RejectAsync(new ReviewDonationCaseRequest
             {
@@ -83,7 +90,8 @@ namespace DonationManagementSystem.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ApprovePayment(int paymentId, string? note)
         {
-            var adminId = User.Identity?.Name ?? "admin";
+            var adminId = _userManager.GetUserId(User) ?? "admin";
+
 
             await _paymentWorkflow.ApproveAsync(new ReviewPaymentRequest
             {
@@ -99,7 +107,8 @@ namespace DonationManagementSystem.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RejectPayment(int paymentId, string? note)
         {
-            var adminId = User.Identity?.Name ?? "admin";
+            var adminId = _userManager.GetUserId(User) ?? "admin";
+
 
             await _paymentWorkflow.RejectAsync(new ReviewPaymentRequest
             {
