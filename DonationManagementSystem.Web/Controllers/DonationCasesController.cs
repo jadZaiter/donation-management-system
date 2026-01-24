@@ -2,11 +2,15 @@
 using DonationManagementSystem.Application.Payments.Models;
 using DonationManagementSystem.Domain.Entities;
 using DonationManagementSystem.Infrastructure.Data;
+using DonationManagementSystem.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Microsoft.AspNetCore.SignalR;
+using DonationManagementSystem.Web.Hubs;
 
 namespace DonationManagementSystem.Web.Controllers
 {
@@ -17,81 +21,94 @@ namespace DonationManagementSystem.Web.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly PaymentWorkflow _paymentWorkflow;
 
+        private readonly IHubContext<AdminNotificationHub> _hub;
+
         public DonationCasesController(
             ApplicationDbContext db,
             UserManager<IdentityUser> userManager,
             IWebHostEnvironment env,
-            PaymentWorkflow paymentWorkflow)
+            PaymentWorkflow paymentWorkflow,
+            IHubContext<AdminNotificationHub> hub)
         {
             _db = db;
             _userManager = userManager;
             _env = env;
             _paymentWorkflow = paymentWorkflow;
+            _hub = hub;
         }
 
-        //  Submit Case Page
+        // ✅ Submit Case Page
         [Authorize]
         public IActionResult Create()
         {
-            return View();
+            return View(new DonationCaseCreateVm());
         }
 
-        //  Submit Case (Pending)
+        // ✅ Submit Case (Pending)
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string title, string description, decimal targetAmount, IFormFile? imageFile)
+        public async Task<IActionResult> Create(DonationCaseCreateVm vm)
         {
-            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description) || targetAmount <= 0)
+            // 1️⃣ DataAnnotations validation (client + server)
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            // 2️⃣ Extra server-only image validation
+            if (vm.ImageFile != null)
             {
-                ModelState.AddModelError("", "Please fill all fields correctly.");
-                return View();
+                if (!vm.ImageFile.ContentType.StartsWith("image/"))
+                {
+                    ModelState.AddModelError(nameof(vm.ImageFile), "Please upload an image file only.");
+                    return View(vm);
+                }
+
+                if (vm.ImageFile.Length > 5 * 1024 * 1024)
+                {
+                    ModelState.AddModelError(nameof(vm.ImageFile), "Image must be 5MB or less.");
+                    return View(vm);
+                }
             }
 
-            //  Save image (optional)
+            // 3️⃣ Save image (optional)
             string? imagePath = null;
 
-            if (imageFile != null && imageFile.Length > 0)
+            if (vm.ImageFile != null && vm.ImageFile.Length > 0)
             {
-                if (!imageFile.ContentType.StartsWith("image/"))
-                {
-                    ModelState.AddModelError("", "Please upload an image file only.");
-                    return View();
-                }
-
-                if (imageFile.Length > 5 * 1024 * 1024)
-                {
-                    ModelState.AddModelError("", "Image must be 5MB or less.");
-                    return View();
-                }
-
                 var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads", "cases");
                 Directory.CreateDirectory(uploadsFolder);
 
-                var extension = Path.GetExtension(imageFile.FileName);
+                var extension = Path.GetExtension(vm.ImageFile.FileName);
                 var fileName = $"{Guid.NewGuid()}{extension}";
                 var fullPath = Path.Combine(uploadsFolder, fileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
-                    await imageFile.CopyToAsync(stream);
+                    await vm.ImageFile.CopyToAsync(stream);
                 }
 
                 imagePath = $"/uploads/cases/{fileName}";
             }
 
+            // 4️⃣ Create entity
             var userId = _userManager.GetUserId(User)!;
 
             var donationCase = new DonationCase
             {
-                Title = title,
-                Description = description,
-                TargetAmount = targetAmount,
+                Title = vm.Title,
+                Description = vm.Description,
+                TargetAmount = vm.TargetAmount,
                 Status = CaseStatus.Pending,
                 CreatedByUserId = userId,
                 ImagePath = imagePath
             };
 
+            // 5️⃣ Logging (user intent)
+            Log.Information(
+                "Donation case submitted. Title: {Title}, Target: {Target}, UserId: {UserId}",
+                vm.Title, vm.TargetAmount, userId);
+
+            // 6️⃣ Save
             _db.DonationCases.Add(donationCase);
             await _db.SaveChangesAsync();
 
@@ -103,37 +120,62 @@ namespace DonationManagementSystem.Web.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var item = await _db.DonationCases
-                .Include(c => c.Donations)
-                .Include(c => c.Comments)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id && c.Status == CaseStatus.Approved);
 
             if (item == null) return NotFound();
 
+            // Aggregates in SQL (fast)
+            var collected = await _db.Donations
+                .AsNoTracking()
+                .Where(d => d.DonationCaseId == id)
+                .SumAsync(d => (decimal?)d.Amount) ?? 0m;
+
+            var donorsCount = await _db.Donations
+                .AsNoTracking()
+                .Where(d => d.DonationCaseId == id)
+                .Select(d => d.UserId)
+                .Distinct()
+                .CountAsync();
+
+            // Comments only (don’t load donations)
+            item.Comments = await _db.Comments
+                .AsNoTracking()
+                .Where(c => c.DonationCaseId == id)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+
+            ViewBag.Collected = collected;
+            ViewBag.DonorsCount = donorsCount;
+
             return View(item);
         }
 
-        //  Donate => create Payment (Pending) via Application workflow
+
+        // ✅ Donate => create Payment (Pending) via Application workflow (ViewModel validation)
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Donate(int caseId, decimal amount)
+        public async Task<IActionResult> Donate(DonateVm vm)
         {
-            if (amount <= 0)
+            // 1️⃣ DataAnnotations validation
+            if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Please enter a valid amount.";
-                return RedirectToAction(nameof(Details), new { id = caseId });
+                return RedirectToAction(nameof(Details), new { id = vm.CaseId });
             }
 
             var userId = _userManager.GetUserId(User)!;
 
             try
             {
-                var paymentId = await _paymentWorkflow.StartBankTransferAsync(new CreatePaymentRequest
-                {
-                    CaseId = caseId,
-                    Amount = amount,
-                    UserId = userId
-                });
+                var paymentId = await _paymentWorkflow.StartBankTransferAsync(
+                    new CreatePaymentRequest
+                    {
+                        CaseId = vm.CaseId,
+                        UserId = userId,
+                        Amount = vm.Amount
+                    });
 
                 TempData["Message"] = "Payment created. Please upload proof to complete verification.";
                 return RedirectToAction(nameof(UploadProof), new { paymentId });
@@ -141,11 +183,11 @@ namespace DonationManagementSystem.Web.Controllers
             catch (Exception ex)
             {
                 TempData["Error"] = ex.Message;
-                return RedirectToAction(nameof(Details), new { id = caseId });
+                return RedirectToAction(nameof(Details), new { id = vm.CaseId });
             }
         }
 
-        //  Comments (still direct DB for now)
+        // ✅ Comments (still direct DB for now)
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -192,7 +234,7 @@ namespace DonationManagementSystem.Web.Controllers
             return View(cases);
         }
 
-        //  Upload proof (GET)
+        // ✅ Upload proof (GET)
         [Authorize]
         public IActionResult UploadProof(int paymentId)
         {
@@ -200,7 +242,7 @@ namespace DonationManagementSystem.Web.Controllers
             return View();
         }
 
-        // Upload proof (POST) => Application workflow
+        // ✅ Upload proof (POST) => Application workflow
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -218,8 +260,15 @@ namespace DonationManagementSystem.Web.Controllers
                 return RedirectToAction(nameof(UploadProof), new { paymentId });
             }
 
+            if (proofFile.Length > 5 * 1024 * 1024)
+            {
+                TempData["Error"] = "Proof image must be 5MB or less.";
+                return RedirectToAction(nameof(UploadProof), new { paymentId });
+            }
+
             var userId = _userManager.GetUserId(User)!;
 
+            // ✅ Save file
             var folder = Path.Combine(_env.WebRootPath, "uploads", "proofs");
             Directory.CreateDirectory(folder);
 
@@ -234,6 +283,7 @@ namespace DonationManagementSystem.Web.Controllers
 
             var proofPath = $"/uploads/proofs/{fileName}";
 
+            // ✅ Save proof in DB via Application workflow
             await _paymentWorkflow.UploadProofAsync(new UploadProofRequest
             {
                 PaymentId = paymentId,
@@ -241,11 +291,21 @@ namespace DonationManagementSystem.Web.Controllers
                 ProofPath = proofPath
             });
 
+            // ✅ STEP 5 FIX: Notify admins in real-time
+            await _hub.Clients.Group("Admins").SendAsync("PaymentProofUploaded", new
+            {
+                PaymentId = paymentId,
+                CaseId = (int?)null,         // optional later
+                UserId = userId,
+                ProofPath = proofPath,
+                Time = DateTime.UtcNow
+            });
+
             TempData["Message"] = "Proof uploaded. Waiting for admin verification.";
             return RedirectToAction(nameof(MyPayments));
         }
 
-        //  MyPayments (via Application workflow)
+        // ✅ MyPayments (via Application workflow)
         [Authorize]
         public async Task<IActionResult> MyPayments()
         {

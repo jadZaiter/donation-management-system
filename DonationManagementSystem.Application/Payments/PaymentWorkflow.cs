@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DonationManagementSystem.Application.Payments.Models;
+using DonationManagementSystem.Domain.Entities;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DonationManagementSystem.Application.Payments.Models;
-using DonationManagementSystem.Domain.Entities;
 
 namespace DonationManagementSystem.Application.Payments
 {
@@ -40,7 +41,11 @@ namespace DonationManagementSystem.Application.Payments
 
         public async Task ApproveAsync(ReviewPaymentRequest req)
         {
+            Log.Information("Payment approved. PaymentId: {PaymentId}, AdminId: {AdminId}",
+   req.PaymentId, req.AdminId);
             await _payments.ApproveAsync(req.PaymentId, req.AdminId, req.Note);
+           
+
         }
 
         public async Task RejectAsync(ReviewPaymentRequest req)

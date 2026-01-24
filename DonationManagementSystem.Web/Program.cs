@@ -1,12 +1,27 @@
+using DonationManagementSystem.Application.Common.Interfaces;
+using DonationManagementSystem.Application.DonationCases;
+using DonationManagementSystem.Application.Payments;
 using DonationManagementSystem.Infrastructure.Data;
+using DonationManagementSystem.Infrastructure.Repositories;
+using DonationManagementSystem.Infrastructure.Services;
+using DonationManagementSystem.Web.BackgroundServices;
+using DonationManagementSystem.Web.Hubs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using DonationManagementSystem.Application.Payments;
-using DonationManagementSystem.Infrastructure.Services;
-using DonationManagementSystem.Application.DonationCases;
+using Serilog;
 
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File(
+        path: "Logs/log-.txt",
+        rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
 
 // Connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
@@ -33,7 +48,37 @@ builder.Services.AddScoped<PaymentWorkflow>();
 builder.Services.AddScoped<IDonationCaseService, DonationCaseService>();
 builder.Services.AddScoped<DonationCaseWorkflow>();
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddHostedService<DonationCaseAutoCloseService>();
+
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddControllersWithViews();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddHostedService<DonationManagementSystem.Web.BackgroundServices.DonationCaseMonitorService>();
+
+builder.Services.AddSignalR();
+
+
+
 var app = builder.Build();
+Log.Information("Application started successfully");
+if (app.Environment.IsDevelopment())
+{
+    app.UseMigrationsEndPoint();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
 
 using (var scope = app.Services.CreateScope())
 {
@@ -70,6 +115,9 @@ app.UseRouting();
 
 app.UseAuthentication();   // 
 app.UseAuthorization();
+
+app.MapHub<AdminNotificationHub>("/hubs/admin");
+
 
 app.MapControllerRoute(
     name: "default",

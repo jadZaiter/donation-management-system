@@ -47,6 +47,11 @@
                                     My Payments
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+
+                            </li>
+
                         }
 
                         @if (User.IsInRole("Admin"))
@@ -65,6 +70,9 @@
                                 <a class="nav-link text-dark" asp-controller="Admin" asp-action="ReviewedCases">
                                     Reviewed Cases
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Dashboard" asp-action="Admin">Admin Dashboard</a>
                             </li>
 
                         }

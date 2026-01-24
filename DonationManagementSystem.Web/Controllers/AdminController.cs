@@ -36,6 +36,7 @@ namespace DonationManagementSystem.Web.Controllers
         public async Task<IActionResult> PendingCases()
         {
             var cases = await _db.DonationCases
+                .AsNoTracking()
                 .Where(c => c.Status == CaseStatus.Pending)
                 .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync();
@@ -122,6 +123,7 @@ namespace DonationManagementSystem.Web.Controllers
         public async Task<IActionResult> ReviewedCases()
         {
             var cases = await _db.DonationCases
+                .AsNoTracking()
                 .Where(c => c.Status == CaseStatus.Approved || c.Status == CaseStatus.Rejected)
                 .OrderByDescending(c => c.ReviewedAt)
                 .ToListAsync();
