@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@using DonationManagementSystem.Domain.Entities
+
+
+@model List<DonationManagementSystem.Domain.Entities.Payment>
+
+<div class=\"mb-4\">
+    <h2>Pending Payment Verifications</h2>
+    <p class=\"text-muted\">Review and verify payment proofs</p>
+</div>
+
+@if (!Model.Any())
+{
+    <div class=\"card\">
+        <div class=\"card-body text-center py-5\">
+            <p class=\"text-muted\">No payments waiting for review.</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class=\"card\">
+        <div class=\"table-responsive\">
+            <table class=\"table table-hover mb-0\">
+                <thead class=\"table-light\">
+                    <tr>
+                        <th>Case</th>
+                        <th>User</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Proof</th>
+                        <th style=\"width:200px;\">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+                        var user = await UserManager.FindByIdAsync(p.UserId);
+                        var email = user?.Email ?? \"anonymous\";
+                        var username = email.Contains(\"@\") ? email.Split('@')[0] : email;
+
+                        @{
+                            var badge = p.Status switch
+                            {
+                                PaymentStatus.Pending => \"bg-secondary\",
+                                PaymentStatus.ProofUploaded => \"bg-warning text-dark\",
+                                PaymentStatus.Approved => \"bg-success\",
+                                PaymentStatus.Rejected => \"bg-danger\",
+                                _ => \"bg-secondary\"
+                            };
+                        }
+
+                        <tr>
+                            <td>
+                                <strong>@(p.DonationCase?.Title != null && p.DonationCase.Title.Length > 35 ? p.DonationCase.Title.Substring(0, 35) + \"...\" : p.DonationCase?.Title)</strong>
+                            </td>
+                            <td>@username</td>
+                            <td><strong class=\"text-primary\">@p.Amount.ToString(\"C\")</strong></td>
+                            <td>
+                                <span class=\"badge @badge\">@p.Status</span>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(p.ProofPath))
+                                {
+                                    <a href=\"@p.ProofPath\" target=\"_blank\" class=\"btn btn-sm btn-outline-info\">View Proof</a>
+                                }
+                                else
+                                {
+                                    <span class=\"text-muted\">—</span>
+                                }
+                            </td>
+                            <td>
+                                <div class=\"btn-group btn-group-sm\" role=\"group\">
+                                    <form asp-action=\"ApprovePayment\" method=\"post\" style=\"display:inline;\" onsubmit=\"return confirm('Approve this payment?');\">
+                                        @Html.AntiForgeryToken()
+                                        <input type=\"hidden\" name=\"paymentId\" value=\"@p.Id\" />
+                                        <input type=\"hidden\" name=\"note\" value=\"\" />
+                                        <button class=\"btn btn-success btn-sm\">Approve</button>
+                                    </form>
+
+                                    <form asp-action=\"RejectPayment\" method=\"post\" style=\"display:inline;\" onsubmit=\"return confirm('Reject this payment?');\">
+                                        @Html.AntiForgeryToken()
+                                        <input type=\"hidden\" name=\"paymentId\" value=\"@p.Id\" />
+                                        <input type=\"hidden\" name=\"note\" value=\"\" />
+                                        <button class=\"btn btn-danger btn-sm\">Reject</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+<script src=\"https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js\"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+      .withUrl(\"/hubs/admin\")
+      .withAutomaticReconnect()
+      .build();
+
+    connection.onreconnecting(err => console.log(\"SignalR reconnecting...\", err));
+    connection.onreconnected(id => console.log(\"SignalR reconnected. ConnectionId:\", id));
+    connection.onclose(err => console.log(\"SignalR closed.\", err));
+
+     connection.on(\"PaymentProofUploaded\", data => {
+      const banner = document.createElement(\"div\");
+      banner.className = \"alert alert-info position-fixed top-0 end-0 m-3\";
+      banner.innerHTML = \"<strong>🔔</strong> New payment proof uploaded!\";
+      document.body.appendChild(banner);
+
+      setTimeout(() => location.reload(), 1500);
+    });
+    connection.start()
+      .then(() => console.log(\"✅ SignalR connected\"))
+      .catch(err => console.error(\"❌ SignalR connect error:\", err));
+</script>

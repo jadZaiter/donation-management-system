@@ -1,30 +1,53 @@
-﻿@model List<DonationManagementSystem.Domain.Entities.Donation>
+@model List<DonationManagementSystem.Domain.Entities.Donation>
 
-<h2>My Donations</h2>
+<div class="mb-4">
+    <h2>My Donations</h2>
+    <p class="text-muted">Track all your donations and contributions</p>
+</div>
 
 @if (!Model.Any())
 {
-    <p>You have not donated yet.</p>
+    <div class="card">
+        <div class="card-body text-center py-5">
+            <p class="text-muted mb-3">You haven't made any donations yet.</p>
+            <a href="/Home/Index" class="btn btn-primary">Explore Cases</a>
+        </div>
+    </div>
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Case</th>
-                <th>Amount</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var d in Model)
-            {
-                <tr>
-                    <td>@d.DonationCase?.Title</td>
-                    <td>@d.Amount</td>
-                    <td>@d.DonatedAt</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Case</th>
+                        <th>Amount Donated</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@(d.DonationCase?.Title != null && d.DonationCase.Title.Length > 50 ? d.DonationCase.Title.Substring(0, 50) + "..." : d.DonationCase?.Title)</strong>
+                            </td>
+                            <td>
+                                <strong class="text-success">@d.Amount.ToString("C")</strong>
+                            </td>
+                            <td>@d.DonatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>
+                                <a href="/DonationCases/Details/@d.DonationCaseId" class="btn btn-sm btn-outline-primary">View Case</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer bg-light">
+            <p class="mb-0 text-muted"><strong>Total Donated:</strong> <span class="text-success">@Model.Sum(d => d.Amount).ToString("C")</span></p>
+        </div>
+    </div>
 }

@@ -1,32 +1,72 @@
-﻿@model List<DonationManagementSystem.Domain.Entities.DonationCase>
+@model List<DonationManagementSystem.Domain.Entities.DonationCase>
 
-<h2>My Submitted Cases</h2>
+<div class="mb-4">
+    <h2>My Submitted Cases</h2>
+    <p class="text-muted">View and manage all your donation cases</p>
+</div>
 
 @if (!Model.Any())
 {
-    <p>You have not submitted any cases yet.</p>
+    <div class="card">
+        <div class="card-body text-center py-5">
+            <p class="text-muted mb-3">You haven't submitted any cases yet.</p>
+            <a href="/DonationCases/Create" class="btn btn-primary">Create Your First Case</a>
+        </div>
+    </div>
 }
 else
 {
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Target</th>
-                <th>Created</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var c in Model)
-            {
-                <tr>
-                    <td>@c.Title</td>
-                    <td>@c.Status</td>
-                    <td>@c.TargetAmount</td>
-                    <td>@c.CreatedAt</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Target Amount</th>
+                        <th>Progress</th>
+                        <th>Submitted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var c in Model)
+                    {
+                        var collected = c.Donations.Sum(d => d.Amount);
+                        var pct = c.TargetAmount <= 0 ? 0 : (int)Math.Min(100, Math.Round((double)(collected / c.TargetAmount * 100)));
+
+                        <tr>
+                            <td>
+                                <strong>@(c.Title.Length > 40 ? c.Title.Substring(0, 40) + "..." : c.Title)</strong>
+                            </td>
+                            <td>
+                                @if (c.Status.ToString() == "Approved")
+                                {
+                                    <span class="badge bg-success">Approved</span>
+                                }
+                                else if (c.Status.ToString() == "Pending")
+                                {
+                                    <span class="badge bg-warning">Pending</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Rejected</span>
+                                }
+                            </td>
+                            <td>@c.TargetAmount.ToString("C")</td>
+                            <td>
+                                <div class="progress" style="width: 120px; height: 20px;">
+                                    <div class="progress-bar" role="progressbar" style="width:@pct%" aria-valuenow="@pct" aria-valuemin="0" aria-valuemax="100">@pct%</div>
+                                </div>
+                            </td>
+                            <td><small>@c.CreatedAt.ToString("yyyy-MM-dd")</small></td>
+                            <td>
+                                <a href="/DonationCases/Details/@c.Id" class="btn btn-sm btn-outline-primary">View</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 }

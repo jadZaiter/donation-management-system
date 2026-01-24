@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M0+sCCA0u6I=",
+  "dgSpecHash": "ZyhOZHmiwcg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

@@ -1,0 +1,64 @@
+﻿@model DonationManagementSystem.Web.ViewModels.DonationCaseCreateVm
+
+@{
+    ViewData["Title"] = "Submit Donation Case";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body p-5">
+                <h2 class="card-title mb-4\">Submit a Donation Case</h2>
+                <p class=\"text-muted mb-4\">Share your story and create a fundraising campaign. Please provide accurate information.</p>
+
+                @if (TempData[\"Message\"] != null)
+                {
+                    <div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+                        @TempData[\"Message\"]
+                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+                    </div>
+                }
+
+                <form asp-action=\"Create\" method=\"post\" enctype=\"multipart/form-data\">
+                    @Html.AntiForgeryToken()
+
+                    <div class=\"mb-4\">
+                        <label asp-for=\"Title\" class=\"form-label\">Case Title</label>
+                        <input asp-for=\"Title\" class=\"form-control form-control-lg\" placeholder=\"Give your case a clear, descriptive title\" />
+                        <span asp-validation-for=\"Title\" class=\"text-danger d-block mt-1\"></span>
+                    </div>
+
+                    <div class=\"mb-4\">
+                        <label asp-for=\"Description\" class=\"form-label\">Description</label>
+                        <textarea asp-for=\"Description\" class=\"form-control\" rows=\"6\" placeholder=\"Provide detailed information about your case, situation, and why you need support...\"></textarea>
+                        <span asp-validation-for=\"Description\" class=\"text-danger d-block mt-1\"></span>
+                    </div>
+
+                    <div class=\"row\">
+                        <div class=\"col-md-6 mb-4\">
+                            <label asp-for=\"TargetAmount\" class=\"form-label\">Target Amount</label>
+                            <input asp-for=\"TargetAmount\" type=\"number\" step=\"0.01\" class=\"form-control form-control-lg\" placeholder=\"0.00\" />
+                            <span asp-validation-for=\"TargetAmount\" class=\"text-danger d-block mt-1\"></span>
+                        </div>
+
+                        <div class=\"col-md-6 mb-4\">
+                            <label asp-for=\"ImageFile\" class=\"form-label\">Cover Image</label>
+                            <input asp-for=\"ImageFile\" type=\"file\" class=\"form-control form-control-lg\" accept=\"image/*\" />
+                            <span asp-validation-for=\"ImageFile\" class=\"text-danger d-block mt-1\"></span>
+                            <small class=\"text-muted d-block mt-2\">Recommended: JPG or PNG, up to 5MB</small>
+                        </div>
+                    </div>
+
+                    <div class=\"d-flex gap-2\">
+                        <button type=\"submit\" class=\"btn btn-primary btn-lg\">Submit Case</button>
+                        <a href=\"/Home/Index\" class=\"btn btn-outline-secondary btn-lg\">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

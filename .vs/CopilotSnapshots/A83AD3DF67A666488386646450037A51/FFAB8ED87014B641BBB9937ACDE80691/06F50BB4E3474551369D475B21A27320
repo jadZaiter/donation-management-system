@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@model List<DonationManagementSystem.Domain.Entities.DonationCase>
+
+@{
+    ViewData["Title"] = "Pending Donation Cases";
+}
+
+<h2>Pending Donation Cases</h2>
+
+@if (!Model.Any())
+{
+    <p>No pending cases.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Target</th>
+                <th>Created At</th>
+                <th>Submitted By</th>
+                <th style="width:260px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var user = await UserManager.FindByIdAsync(item.CreatedByUserId);
+                var email = user?.Email ?? "unknown";
+                var username = email.Contains("@") ? email.Split('@')[0] : email;
+
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.TargetAmount</td>
+                    <td>@item.CreatedAt</td>
+                    <td>@username</td>
+                    <td>
+                        <!-- Approve -->
+                        <form asp-action="Approve" method="post" class="mb-1">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="text"
+                                   name="note"
+                                   class="form-control form-control-sm mb-1"
+                                   placeholder="Admin note (optional)" />
+                            <button class="btn btn-success btn-sm w-100">Approve</button>
+                        </form>
+
+                        <!-- Reject -->
+                        <form asp-action="Reject" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="text"
+                                   name="note"
+                                   class="form-control form-control-sm mb-1"
+                                   placeholder="Admin note (optional)" />
+                            <button class="btn btn-danger btn-sm w-100">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

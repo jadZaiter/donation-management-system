@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@using DonationManagementSystem.Domain.Entities
+@model List<DonationManagementSystem.Domain.Entities.DonationCase>
+
+@{
+    ViewData["Title"] = "Reviewed Cases";
+}
+
+<div class=\"mb-4\">
+    <h2>Reviewed Cases</h2>
+    <p class=\"text-muted\">View all cases that have been reviewed and approved or rejected</p>
+</div>
+
+@if (!Model.Any())
+{
+    <div class=\"card\">
+        <div class=\"card-body text-center py-5\">
+            <p class=\"text-muted\">No reviewed cases yet.</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class=\"card\">
+        <div class=\"table-responsive\">
+            <table class=\"table table-hover mb-0\">
+                <thead class=\"table-light\">
+                    <tr>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Submitted By</th>
+                        <th>Reviewed By</th>
+                        <th>Review Date</th>
+                        <th>Admin Note</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var submitUser = await UserManager.FindByIdAsync(item.CreatedByUserId);
+                        var submitEmail = submitUser?.Email ?? \"unknown\";
+                        var submitName = submitEmail.Contains(\"@\") ? submitEmail.Split('@')[0] : submitEmail;
+
+                        var reviewerName = \"—\";
+                        if (!string.IsNullOrEmpty(item.ReviewedByUserId))
+                        {
+                            var reviewer = await UserManager.FindByIdAsync(item.ReviewedByUserId);
+                            var reviewerEmail = reviewer?.Email ?? item.ReviewedByUserId;
+                            reviewerName = reviewerEmail.Contains(\"@\") ? reviewerEmail.Split('@')[0] : reviewerEmail;
+                        }
+
+                        var badge = item.Status switch
+                        {
+                            CaseStatus.Approved => \"bg-success\",
+                            CaseStatus.Rejected => \"bg-danger\",
+                            _ => \"bg-secondary\"
+                        };
+
+                        <tr>
+                            <td>
+                                <strong>@(item.Title.Length > 40 ? item.Title.Substring(0, 40) + \"...\" : item.Title)</strong>
+                            </td>
+                            <td><span class=\"badge @badge\">@item.Status</span></td>
+                            <td><small>@submitName</small></td>
+                            <td><small>@reviewerName</small></td>
+                            <td><small>@(item.ReviewedAt?.ToString(\"yyyy-MM-dd\") ?? \"—\")</small></td>
+                            <td>
+                                @if (!string.IsNullOrWhiteSpace(item.AdminNote))
+                                {
+                                    <small class=\"text-muted\">@(item.AdminNote.Length > 25 ? item.AdminNote.Substring(0, 25) + \"...\" : item.AdminNote)</small>
+                                }
+                                else
+                                {
+                                    <span class=\"text-muted\">—</span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-controller=\"DonationCases\" asp-action=\"Details\" asp-route-id=\"@item.Id\" class=\"btn btn-sm btn-outline-primary\">View</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

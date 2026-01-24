@@ -1,0 +1,32 @@
+﻿@model List<DonationManagementSystem.Domain.Entities.DonationCase>
+
+<h2>My Submitted Cases</h2>
+
+@if (!Model.Any())
+{
+    <p>You have not submitted any cases yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Target</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.Title</td>
+                    <td>@c.Status</td>
+                    <td>@c.TargetAmount</td>
+                    <td>@c.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

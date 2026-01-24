@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KOun3xMSHkE=",
+  "dgSpecHash": "ov7AE19YMGQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",

@@ -5426,11 +5426,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj",
       "projectName": "DonationManagementSystem.Web",
-      "projectPath": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj",
+      "projectPath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Web\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5451,11 +5451,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj": {
-              "projectPath": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj"
+            "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj": {
+              "projectPath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj"
             },
-            "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\PC\\source\\repos\\DonationManagementSystem\\DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj"
+            "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj"
             }
           }
         }

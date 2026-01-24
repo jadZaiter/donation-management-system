@@ -1,0 +1,172 @@
+﻿@model DonationManagementSystem.Web.ViewModels.Dashboard.UserDashboardVm
+@{
+    ViewData["Title"] = "My Dashboard";
+}
+
+<div class=\"mb-4\">
+    <h2>My Dashboard</h2>
+    <p class=\"text-muted\">Overview of your cases and donations</p>
+</div>
+
+<div class=\"row mb-5 g-4\">
+    <div class=\"col-lg-3 col-md-6\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <div class=\"d-flex justify-content-between align-items-start\">
+                    <div>
+                        <p class=\"text-muted mb-1\">My Cases</p>
+                        <h3 class=\"mb-0\">@Model.MyCasesCount</h3>
+                    </div>
+                    <span style=\"font-size: 2rem;\">📋</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=\"col-lg-3 col-md-6\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <div class=\"d-flex justify-content-between align-items-start\">
+                    <div>
+                        <p class=\"text-muted mb-1\">Payments</p>
+                        <h3 class=\"mb-0\">@Model.MyPaymentsCount</h3>
+                    </div>
+                    <span style=\"font-size: 2rem;\">💳</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=\"col-lg-3 col-md-6\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <div class=\"d-flex justify-content-between align-items-start\">
+                    <div>
+                        <p class=\"text-muted mb-1\">Total Donated</p>
+                        <h3 class=\"mb-0\">@Model.TotalDonatedApproved</h3>
+                    </div>
+                    <span style=\"font-size: 2rem;\">❤️</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=\"col-lg-3 col-md-6\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <div>
+                    <p class=\"text-muted mb-1\">Payment Status</p>
+                    <div class=\"d-flex gap-2\">
+                        <span class=\"badge bg-warning\">@Model.PendingPaymentsCount</span>
+                        <span class=\"badge bg-success\">@Model.ApprovedPaymentsCount</span>
+                        <span class=\"badge bg-danger\">@Model.RejectedPaymentsCount</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=\"row g-4\">
+    <div class=\"col-lg-6\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <h5 class=\"card-title mb-4\">Latest Cases</h5>
+                @if (!Model.LatestCases.Any())
+                {
+                    <p class=\"text-muted\">You haven't submitted any cases yet.</p>
+                }
+                else
+                {
+                    <div class=\"table-responsive\">
+                        <table class=\"table table-sm mb-0\">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var c in Model.LatestCases)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@(c.Title.Length > 30 ? c.Title.Substring(0, 30) + \"...\" : c.Title)</strong>
+                                        </td>
+                                        <td>
+                                            @if (c.Status.ToString() == \"Approved\")
+                                            {
+                                                <span class=\"badge bg-success\">Approved</span>
+                                            }
+                                            else if (c.Status.ToString() == \"Pending\")
+                                            {
+                                                <span class=\"badge bg-warning\">Pending</span>
+                                            }
+                                            else
+                                            {
+                                                <span class=\"badge bg-danger\">Rejected</span>
+                                            }
+                                        </td>
+                                        <td><small>@c.CreatedAt.ToString(\"yyyy-MM-dd\")</small></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class=\"col-lg-6\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <h5 class=\"card-title mb-4\">Recent Payments</h5>
+                @if (!Model.LatestPayments.Any())
+                {
+                    <p class=\"text-muted\">No payment history yet.</p>
+                }
+                else
+                {
+                    <div class=\"table-responsive\">
+                        <table class=\"table table-sm mb-0\">
+                            <thead>
+                                <tr>
+                                    <th>Case</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.LatestPayments)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@(p.DonationCase?.Title != null && p.DonationCase.Title.Length > 25 ? p.DonationCase.Title.Substring(0, 25) + \"...\" : p.DonationCase?.Title)</strong>
+                                        </td>
+                                        <td>@p.Amount.ToString(\"C\")</td>
+                                        <td>
+                                            @if (p.Status.ToString() == \"Approved\")
+                                            {
+                                                <span class=\"badge bg-success\">Approved</span>
+                                            }
+                                            else if (p.Status.ToString() == \"Pending\")
+                                            {
+                                                <span class=\"badge bg-warning\">Pending</span>
+                                            }
+                                            else
+                                            {
+                                                <span class=\"badge bg-danger\">Rejected</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
