@@ -1,0 +1,218 @@
+@model DonationManagementSystem.Application.DonationCases.Dtos.DonationCaseSearchResultDto
+
+@{
+    ViewData["Title"] = "Search Donation Cases";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Search Donation Cases</h2>
+
+    <!-- Search Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Search Keywords</label>
+                        <input type="text" name="keyword" class="form-control" placeholder="Case title or description..." value="@Model?.CurrentFilters?.Keyword" />
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Category</label>
+                        <select name="categoryId" class="form-control">
+                            <option value="">All Categories</option>
+                            @if (Model?.Categories != null)
+                            {
+                                @foreach (var cat in Model.Categories)
+                                {
+                                    if (Model?.CurrentFilters?.CategoryId == cat.Id)
+                                    {
+                                        <option value="@cat.Id" selected="selected">@cat.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@cat.Id">@cat.Name</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Sort By</label>
+                        <select name="sortBy" class="form-control">
+                            @{
+                                var sortBy = Model?.CurrentFilters?.SortBy ?? "newest";
+                            }
+                            @if (sortBy == "newest")
+                            {
+                                <option value="newest" selected="selected">Most Recent</option>
+                            }
+                            else
+                            {
+                                <option value="newest">Most Recent</option>
+                            }
+                            @if (sortBy == "oldest")
+                            {
+                                <option value="oldest" selected="selected">Oldest</option>
+                            }
+                            else
+                            {
+                                <option value="oldest">Oldest</option>
+                            }
+                            @if (sortBy == "highest-goal")
+                            {
+                                <option value="highest-goal" selected="selected">Highest Goal</option>
+                            }
+                            else
+                            {
+                                <option value="highest-goal">Highest Goal</option>
+                            }
+                            @if (sortBy == "most-funded")
+                            {
+                                <option value="most-funded" selected="selected">Most Funded</option>
+                            }
+                            else
+                            {
+                                <option value="most-funded">Most Funded</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Results Per Page</label>
+                        <select name="pageSize" class="form-control">
+                            @{
+                                var pageSize = Model?.CurrentFilters?.PageSize ?? 12;
+                            }
+                            @if (pageSize == 12)
+                            {
+                                <option value="12" selected="selected">12</option>
+                            }
+                            else
+                            {
+                                <option value="12">12</option>
+                            }
+                            @if (pageSize == 24)
+                            {
+                                <option value="24" selected="selected">24</option>
+                            }
+                            else
+                            {
+                                <option value="24">24</option>
+                            }
+                            @if (pageSize == 50)
+                            {
+                                <option value="50" selected="selected">50</option>
+                            }
+                            else
+                            {
+                                <option value="50">50</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <a href="/Home/Search" class="btn btn-secondary">Clear</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results -->
+    @if (Model?.Cases?.Any() == true)
+    {
+        <div class="row">
+            @foreach (var item in Model.Cases)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="@item.ImagePath" class="card-img-top" style="height: 200px; object-fit: cover;" alt="@item.Title" />
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">
+                                @{
+                                    var description = item.Description ?? "";
+                                    if (description.Length > 100)
+                                    {
+                                        <text>@description.Substring(0, 100)...</text>
+                                    }
+                                    else
+                                    {
+                                        <text>@description</text>
+                                    }
+                                }
+                            </p>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <small class="text-muted">Collected: <strong>@item.CollectedAmount.ToString("C")</strong></small>
+                                    <small class="text-muted">Target: <strong>@item.TargetAmount.ToString("C")</strong></small>
+                                </div>
+                                @{
+                                    var percent = item.TargetAmount > 0 ? (int)Math.Min(100, Math.Round((item.CollectedAmount / item.TargetAmount * 100))) : 0;
+                                }
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: @percent%"></div>
+                                </div>
+                                <small class="text-muted">@percent% • @item.DonorsCount donors</small>
+                            </div>
+
+                            <a href="/DonationCases/Details/@item.Id" class="btn btn-primary btn-sm">View Case</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        @if (Model.TotalPages > 1)
+        {
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    @if (Model.PageNumber > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?pageNumber=1&pageSize=@Model.PageSize&keyword=@(Model?.CurrentFilters?.Keyword ?? "")&categoryId=@(Model?.CurrentFilters?.CategoryId ?? 0)&sortBy=@(Model?.CurrentFilters?.SortBy ?? "newest")">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?pageNumber=@(Model.PageNumber - 1)&pageSize=@Model.PageSize&keyword=@(Model?.CurrentFilters?.Keyword ?? "")&categoryId=@(Model?.CurrentFilters?.CategoryId ?? 0)&sortBy=@(Model?.CurrentFilters?.SortBy ?? "newest")">Previous</a>
+                        </li>
+                    }
+
+                    @for (int i = Math.Max(1, Model.PageNumber - 2); i <= Math.Min(Model.TotalPages, Model.PageNumber + 2); i++)
+                    {
+                        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a class="page-link" href="?pageNumber=@i&pageSize=@Model.PageSize&keyword=@(Model?.CurrentFilters?.Keyword ?? "")&categoryId=@(Model?.CurrentFilters?.CategoryId ?? 0)&sortBy=@(Model?.CurrentFilters?.SortBy ?? "newest")">@i</a>
+                        </li>
+                    }
+
+                    @if (Model.PageNumber < Model.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?pageNumber=@(Model.PageNumber + 1)&pageSize=@Model.PageSize&keyword=@(Model?.CurrentFilters?.Keyword ?? "")&categoryId=@(Model?.CurrentFilters?.CategoryId ?? 0)&sortBy=@(Model?.CurrentFilters?.SortBy ?? "newest")">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?pageNumber=@Model.TotalPages&pageSize=@Model.PageSize&keyword=@(Model?.CurrentFilters?.Keyword ?? "")&categoryId=@(Model?.CurrentFilters?.CategoryId ?? 0)&sortBy=@(Model?.CurrentFilters?.SortBy ?? "newest")">Last</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <p>No cases found. Try adjusting your search filters.</p>
+        </div>
+    }
+</div>

@@ -1,12 +1,6 @@
 ﻿using DonationManagementSystem.Application.Common.Interfaces;
-using DonationManagementSystem.Application.Common.Interfaces;
 using DonationManagementSystem.Domain.Entities;
 using DonationManagementSystem.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DonationManagementSystem.Infrastructure.Repositories
 {
@@ -21,13 +15,19 @@ namespace DonationManagementSystem.Infrastructure.Repositories
             DonationCases = new Repository<DonationCase>(_db);
             Payments = new Repository<Payment>(_db);
             Comments = new Repository<Comment>(_db);
-            Donations = new Repository<Donation>(_db);  
+            Donations = new Repository<Donation>(_db);
+            Notifications = new Repository<Notification>(_db);
+            Categories = new Repository<Category>(_db);
+            Tags = new Repository<Tag>(_db);
         }
 
         public IRepository<DonationCase> DonationCases { get; }
         public IRepository<Payment> Payments { get; }
         public IRepository<Comment> Comments { get; }
-        public IRepository<Donation> Donations { get; }    
+        public IRepository<Donation> Donations { get; }
+        public IRepository<Notification> Notifications { get; }
+        public IRepository<Category> Categories { get; }
+        public IRepository<Tag> Tags { get; }
 
         public Task<int> SaveChangesAsync(CancellationToken ct = default)
             => _db.SaveChangesAsync(ct);

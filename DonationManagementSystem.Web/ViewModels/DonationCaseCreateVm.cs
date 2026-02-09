@@ -14,6 +14,12 @@ namespace DonationManagementSystem.Web.ViewModels
         [Range(1, 100000000)]
         public decimal TargetAmount { get; set; }
 
+        [Required]
+        public int CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Please select at least one tag")]
+        public List<int> TagIds { get; set; } = new();
+
         // Optional image
         public IFormFile? ImageFile { get; set; }
     }

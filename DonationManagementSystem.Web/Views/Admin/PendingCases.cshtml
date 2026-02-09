@@ -1,76 +1,68 @@
-@using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> UserManager
-
 @model List<DonationManagementSystem.Domain.Entities.DonationCase>
 
 @{
-    ViewData["Title"] = "Pending Donation Cases";
+    ViewData["Title"] = "Pending Cases";
 }
 
-<div class="mb-4">
-    <h2>Pending Cases Review</h2>
-    <p class="text-muted">Review and approve or reject pending donation cases</p>
-</div>
+<div class="container mt-5">
+    <h2 class="mb-4">Pending Cases for Review</h2>
 
-@if (!Model.Any())
-{
-    <div class="card">
-        <div class="card-body text-center py-5">
-            <p class="text-muted">No pending cases to review.</p>
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    </div>
-}
-else
-{
-    <div class="card">
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <p>No pending cases at the moment.</p>
+        </div>
+    }
+    else
+    {
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover">
                 <thead class="table-light">
                     <tr>
+                        <th>ID</th>
                         <th>Title</th>
-                        <th>Target Amount</th>
-                        <th>Submitted By</th>
-                        <th>Date</th>
-                        <th style="width:280px;">Actions</th>
+                        <th>Target</th>
+                        <th>Category</th>
+                        <th>Submitted</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        var user = await UserManager.FindByIdAsync(item.CreatedByUserId);
-                        var email = user?.Email ?? "unknown";
-                        var username = email.Contains("@") ? email.Split('@')[0] : email;
-
                         <tr>
+                            <td>@item.Id</td>
                             <td>
-                                <strong>@(item.Title.Length > 40 ? item.Title.Substring(0, 40) + "..." : item.Title)</strong>
+                                <strong>@item.Title</strong><br />
+                                <small class="text-muted">@item.Description.Substring(0, Math.Min(50, item.Description.Length))...</small>
                             </td>
                             <td>@item.TargetAmount.ToString("C")</td>
-                            <td><small>@username</small></td>
-                            <td><small>@item.CreatedAt.ToString("yyyy-MM-dd")</small></td>
+                            <td>@item.Category?.Name</td>
+                            <td>@item.CreatedAt.ToString("MMM dd, yyyy")</td>
                             <td>
-                                <div class="btn-group btn-group-sm" role="group">
-                                    <a href="/DonationCases/Details/@item.Id" class="btn btn-outline-info" target="_blank">View</a>
-
-                                    <form asp-action="Approve" method="post" style="display:inline;" onsubmit="return confirm('Approve this case?');">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="id" value="@item.Id" />
-                                        <input type="hidden" name="note" value="" />
-                                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                                    </form>
-
-                                    <form asp-action="Reject" method="post" style="display:inline;" onsubmit="return confirm('Reject this case?');">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="id" value="@item.Id" />
-                                        <input type="hidden" name="note" value="" />
-                                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                                    </form>
-                                </div>
+                                <a href="/Admin/Approve/@item.Id" class="btn btn-sm btn-success">Approve</a>
+                                <a href="/Admin/Reject/@item.Id" class="btn btn-sm btn-danger">Reject</a>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-    </div>
-}
+    }
+</div>

@@ -4,99 +4,71 @@
 
 @model List<DonationManagementSystem.Domain.Entities.Payment>
 
-<div class="mb-4">
-    <h2>My Payments</h2>
-    <p class="text-muted">Track the status of your payment submissions</p>
-</div>
-
-@if (!Model.Any())
-{
-    <div class="card">
-        <div class="card-body text-center py-5">
-            <p class="text-muted">No payments yet.</p>
-        </div>
-    </div>
+@{
+    ViewData["Title"] = "My Payments";
 }
-else
-{
-    <div class="card">
+
+<div class="container mt-5">
+    <h2 class="mb-4">My Payments</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <p>You haven't made any donations yet.</p>
+            <a href="/Home/Search" class="btn btn-primary">Browse Cases</a>
+        </div>
+    }
+    else
+    {
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover">
                 <thead class="table-light">
                     <tr>
                         <th>Case</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Proof</th>
-                        <th>Submitted</th>
-                        <th>Review Info</th>
-                        <th>Admin Note</th>
+                        <th>Method</th>
+                        <th>Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    @foreach (var p in Model)
+                    @foreach (var payment in Model)
                     {
-                        // Status badge
-                        var badge = p.Status switch
-                        {
-                            PaymentStatus.Pending => "bg-secondary",
-                            PaymentStatus.ProofUploaded => "bg-warning text-dark",
-                            PaymentStatus.Approved => "bg-success",
-                            PaymentStatus.Rejected => "bg-danger",
-                            _ => "bg-secondary"
-                        };
-
-                        // Reviewed info
-                        string reviewerName = "—";
-                        if (!string.IsNullOrWhiteSpace(p.ReviewedByUserId))
-                        {
-                            var reviewer = await UserManager.FindByIdAsync(p.ReviewedByUserId);
-                            var reviewerEmail = reviewer?.Email;
-
-                            if (!string.IsNullOrWhiteSpace(reviewerEmail))
-                                reviewerName = reviewerEmail.Contains("@") ? reviewerEmail.Split('@')[0] : reviewerEmail;
-                            else
-                                reviewerName = "Admin";
-                        }
-
-                        var reviewedText = p.ReviewedAt.HasValue
-                        ? $"{reviewerName} • {p.ReviewedAt.Value:yyyy-MM-dd HH:mm}"
-                        : "Pending review";
+                        var statusBadgeClass = payment.Status == DonationManagementSystem.Domain.Entities.PaymentStatus.Pending ? "bg-warning" :
+                                              payment.Status == DonationManagementSystem.Domain.Entities.PaymentStatus.ProofUploaded ? "bg-info" :
+                                              payment.Status == DonationManagementSystem.Domain.Entities.PaymentStatus.Approved ? "bg-success" : "bg-danger";
 
                         <tr>
                             <td>
-                                <strong>@(p.DonationCase?.Title != null && p.DonationCase.Title.Length > 30 ? p.DonationCase.Title.Substring(0, 30) + "..." : p.DonationCase?.Title ?? "—")</strong>
+                                <strong>@payment.DonationCase?.Title</strong>
                             </td>
+                            <td>@payment.Amount.ToString("C")</td>
                             <td>
-                                <strong class="text-success">@p.Amount.ToString("C")</strong>
+                                <span class="badge @statusBadgeClass">@payment.Status</span>
                             </td>
-
+                            <td>@payment.Method</td>
+                            <td>@payment.CreatedAt.ToString("MMM dd, yyyy")</td>
                             <td>
-                                <span class="badge @badge">@p.Status</span>
-                            </td>
-
-                            <td>
-                                @if (!string.IsNullOrEmpty(p.ProofPath))
+                                @if (payment.Status == DonationManagementSystem.Domain.Entities.PaymentStatus.Pending)
                                 {
-                                    <a href="@p.ProofPath" target="_blank" class="btn btn-sm btn-outline-primary">View</a>
+                                    <a href="/DonationCases/UploadProof/@payment.Id" class="btn btn-sm btn-primary">Upload Proof</a>
                                 }
-                                else
+                                @if (payment.Status == DonationManagementSystem.Domain.Entities.PaymentStatus.ProofUploaded)
                                 {
-                                    <span class="text-muted">—</span>
+                                    <span class="text-muted">Awaiting Review</span>
                                 }
-                            </td>
-
-                            <td><small>@p.CreatedAt.ToString("yyyy-MM-dd HH:mm")</small></td>
-                            <td><small>@reviewedText</small></td>
-                            <td>
-                                @if (!string.IsNullOrWhiteSpace(p.AdminNote))
+                                @if (!string.IsNullOrEmpty(payment.ProofPath))
                                 {
-                                    <small class="text-muted">@(p.AdminNote.Length > 20 ? p.AdminNote.Substring(0, 20) + "..." : p.AdminNote)</small>
-                                }
-                                else
-                                {
-                                    <span class="text-muted">—</span>
+                                    <a href="@payment.ProofPath" target="_blank" class="btn btn-sm btn-secondary">View Proof</a>
                                 }
                             </td>
                         </tr>
@@ -104,5 +76,5 @@ else
                 </tbody>
             </table>
         </div>
-    </div>
-}
+    }
+</div>

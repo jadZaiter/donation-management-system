@@ -1,0 +1,12 @@
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\bin\Release\net8.0\DonationManagementSystem.Domain.deps.json
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\bin\Release\net8.0\DonationManagementSystem.Domain.dll
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\bin\Release\net8.0\DonationManagementSystem.Domain.pdb
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\DonationManagementSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\DonationManagementSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\DonationManagementSystem.Domain.AssemblyInfo.cs
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\DonationManagementSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\DonationManagementSystem.Domain.sourcelink.json
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\DonationManagementSystem.Domain.dll
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\refint\DonationManagementSystem.Domain.dll
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\DonationManagementSystem.Domain.pdb
+C:\Users\PC\Desktop\New folder (7)\donation-management-system\DonationManagementSystem.Domain\obj\Release\net8.0\ref\DonationManagementSystem.Domain.dll

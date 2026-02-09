@@ -1,52 +1,80 @@
-﻿using DonationManagementSystem.Application.Payments;
+﻿using DonationManagementSystem.Application.Common.Interfaces;
+using DonationManagementSystem.Application.Payments;
 using DonationManagementSystem.Application.Payments.Models;
 using DonationManagementSystem.Domain.Entities;
 using DonationManagementSystem.Infrastructure.Data;
+using DonationManagementSystem.Infrastructure.Services;
 using DonationManagementSystem.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Microsoft.AspNetCore.SignalR;
 using DonationManagementSystem.Web.Hubs;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DonationManagementSystem.Web.Controllers
 {
+    [Route("DonationCases")]
     public class DonationCasesController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _env;
         private readonly PaymentWorkflow _paymentWorkflow;
-
         private readonly IHubContext<AdminNotificationHub> _hub;
+        private readonly PaymentService _paymentService;
+        private readonly INotificationService _notificationService;
 
         public DonationCasesController(
             ApplicationDbContext db,
             UserManager<IdentityUser> userManager,
             IWebHostEnvironment env,
             PaymentWorkflow paymentWorkflow,
-            IHubContext<AdminNotificationHub> hub)
+            IHubContext<AdminNotificationHub> hub,
+            PaymentService paymentService,
+            INotificationService notificationService)
         {
             _db = db;
             _userManager = userManager;
             _env = env;
             _paymentWorkflow = paymentWorkflow;
             _hub = hub;
+            _paymentService = paymentService;
+            _notificationService = notificationService;
         }
 
-        // ✅ Submit Case Page
+        // ✅ Submit Case Page - GET
+        [HttpGet("Create")]
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var categories = await _db.Categories
+                .AsNoTracking()
+                .OrderBy(c => c.Name)
+                .ToListAsync();
+            
+            var tags = await _db.Tags
+                .AsNoTracking()
+                .OrderBy(t => t.Name)
+                .ToListAsync();
+            
+            ViewBag.Categories = categories.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name
+            }).ToList();
+            
+            ViewBag.Tags = tags;
+            
             return View(new DonationCaseCreateVm());
         }
 
-        // ✅ Submit Case (Pending)
+        // ✅ Submit Case - POST
+        [HttpPost("Create")]
         [Authorize]
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DonationCaseCreateVm vm)
         {
@@ -54,7 +82,27 @@ namespace DonationManagementSystem.Web.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
-            // 2️⃣ Extra server-only image validation
+            // 2️⃣ Validate category exists
+            var categoryExists = await _db.Categories.AnyAsync(c => c.Id == vm.CategoryId);
+            if (!categoryExists)
+            {
+                ModelState.AddModelError(nameof(vm.CategoryId), "Selected category is invalid.");
+                return View(vm);
+            }
+
+            // 3️⃣ Validate tags exist
+            var validTagIds = await _db.Tags
+                .Where(t => vm.TagIds.Contains(t.Id))
+                .Select(t => t.Id)
+                .ToListAsync();
+            
+            if (validTagIds.Count != vm.TagIds.Count)
+            {
+                ModelState.AddModelError(nameof(vm.TagIds), "One or more selected tags are invalid.");
+                return View(vm);
+            }
+
+            // 4️⃣ Extra server-only image validation
             if (vm.ImageFile != null)
             {
                 if (!vm.ImageFile.ContentType.StartsWith("image/"))
@@ -70,7 +118,7 @@ namespace DonationManagementSystem.Web.Controllers
                 }
             }
 
-            // 3️⃣ Save image (optional)
+            // 5️⃣ Save image (optional)
             string? imagePath = null;
 
             if (vm.ImageFile != null && vm.ImageFile.Length > 0)
@@ -90,7 +138,7 @@ namespace DonationManagementSystem.Web.Controllers
                 imagePath = $"/uploads/cases/{fileName}";
             }
 
-            // 4️⃣ Create entity
+            // 6️⃣ Create entity with Category
             var userId = _userManager.GetUserId(User)!;
 
             var donationCase = new DonationCase
@@ -98,67 +146,91 @@ namespace DonationManagementSystem.Web.Controllers
                 Title = vm.Title,
                 Description = vm.Description,
                 TargetAmount = vm.TargetAmount,
+                CategoryId = vm.CategoryId,
                 Status = CaseStatus.Pending,
                 CreatedByUserId = userId,
                 ImagePath = imagePath
             };
 
-            // 5️⃣ Logging (user intent)
-            Log.Information(
-                "Donation case submitted. Title: {Title}, Target: {Target}, UserId: {UserId}",
-                vm.Title, vm.TargetAmount, userId);
+            // 7️⃣ Add tags (many-to-many)
+            foreach (var tagId in vm.TagIds)
+            {
+                donationCase.DonationCaseTags.Add(new DonationCaseTag
+                {
+                    TagId = tagId
+                });
+            }
 
-            // 6️⃣ Save
+            // 8️⃣ Logging (user intent)
+            Log.Information(
+                "Donation case submitted. Title: {Title}, Target: {Target}, Category: {Category}, Tags: {Tags}, UserId: {UserId}",
+                vm.Title, vm.TargetAmount, vm.CategoryId, string.Join(",", vm.TagIds), userId);
+
+            // 9️⃣ Save case
             _db.DonationCases.Add(donationCase);
             await _db.SaveChangesAsync();
+
+            // ✅ 🔟 CREATE NOTIFICATION FOR ADMINS
+            await _notificationService.CreateForAdminsAsync(
+                title: "New Case Submitted",
+                message: $"New donation case submitted: {donationCase.Title}",
+                link: $"/DonationCases/Details/{donationCase.Id}",
+                type: NotificationType.CaseSubmitted
+            );
 
             TempData["Message"] = "Case submitted successfully. Waiting for admin approval.";
             return RedirectToAction(nameof(Create));
         }
 
-        // ✅ Details (Approved only)
+        // ✅ Details
+        [HttpGet("Details/{id}")]
         public async Task<IActionResult> Details(int id)
         {
+            var userId = _userManager.GetUserId(User);
+            
             var item = await _db.DonationCases
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == id && c.Status == CaseStatus.Approved);
+                .Include(c => c.Comments)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-            if (item == null) return NotFound();
+            if (item == null) 
+                return NotFound();
 
-            // Aggregates in SQL (fast)
-            var collected = await _db.Donations
+            // ✅ Allow viewing if: case is approved OR user created it OR user is admin
+            var isOwner = userId == item.CreatedByUserId;
+            var isAdmin = User.IsInRole("Admin");
+            var isApproved = item.Status == CaseStatus.Approved;
+
+            if (!isApproved && !isOwner && !isAdmin)
+                return NotFound();
+
+            // ✅ ONLY count APPROVED payments
+            var collected = await _db.Payments
                 .AsNoTracking()
-                .Where(d => d.DonationCaseId == id)
+                .Where(d => d.DonationCaseId == id && d.Status == PaymentStatus.Approved)
                 .SumAsync(d => (decimal?)d.Amount) ?? 0m;
 
-            var donorsCount = await _db.Donations
+            var donorsCount = await _db.Payments
                 .AsNoTracking()
-                .Where(d => d.DonationCaseId == id)
+                .Where(d => d.DonationCaseId == id && d.Status == PaymentStatus.Approved)
                 .Select(d => d.UserId)
                 .Distinct()
                 .CountAsync();
 
-            // Comments only (don’t load donations)
-            item.Comments = await _db.Comments
-                .AsNoTracking()
-                .Where(c => c.DonationCaseId == id)
-                .OrderByDescending(c => c.CreatedAt)
-                .ToListAsync();
-
-            ViewBag.Collected = collected;
+                ViewBag.Collected = collected;
             ViewBag.DonorsCount = donorsCount;
+            ViewBag.IsOwner = isOwner;
+            ViewBag.IsAdmin = isAdmin;
 
             return View(item);
         }
 
-
-        // ✅ Donate => create Payment (Pending) via Application workflow (ViewModel validation)
+        // ✅ Donate
+        [HttpPost("Donate")]
         [Authorize]
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Donate(DonateVm vm)
         {
-            // 1️⃣ DataAnnotations validation
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Please enter a valid amount.";
@@ -187,9 +259,9 @@ namespace DonationManagementSystem.Web.Controllers
             }
         }
 
-        // ✅ Comments (still direct DB for now)
+        // ✅ Add Comment
+        [HttpPost("AddComment")]
         [Authorize]
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddComment(int caseId, string text)
         {
@@ -221,6 +293,8 @@ namespace DonationManagementSystem.Web.Controllers
             return RedirectToAction(nameof(Details), new { id = caseId });
         }
 
+        // ✅ My Cases
+        [HttpGet("MyCases")]
         [Authorize]
         public async Task<IActionResult> MyCases()
         {
@@ -234,7 +308,8 @@ namespace DonationManagementSystem.Web.Controllers
             return View(cases);
         }
 
-        // ✅ Upload proof (GET)
+        // ✅ Upload Proof - GET
+        [HttpGet("UploadProof/{paymentId}")]
         [Authorize]
         public IActionResult UploadProof(int paymentId)
         {
@@ -242,9 +317,9 @@ namespace DonationManagementSystem.Web.Controllers
             return View();
         }
 
-        // ✅ Upload proof (POST) => Application workflow
+        // ✅ Upload Proof - POST
+        [HttpPost("UploadProof/{paymentId}")]
         [Authorize]
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadProof(int paymentId, IFormFile proofFile)
         {
@@ -268,7 +343,6 @@ namespace DonationManagementSystem.Web.Controllers
 
             var userId = _userManager.GetUserId(User)!;
 
-            // ✅ Save file
             var folder = Path.Combine(_env.WebRootPath, "uploads", "proofs");
             Directory.CreateDirectory(folder);
 
@@ -283,7 +357,6 @@ namespace DonationManagementSystem.Web.Controllers
 
             var proofPath = $"/uploads/proofs/{fileName}";
 
-            // ✅ Save proof in DB via Application workflow
             await _paymentWorkflow.UploadProofAsync(new UploadProofRequest
             {
                 PaymentId = paymentId,
@@ -291,11 +364,10 @@ namespace DonationManagementSystem.Web.Controllers
                 ProofPath = proofPath
             });
 
-            // ✅ STEP 5 FIX: Notify admins in real-time
             await _hub.Clients.Group("Admins").SendAsync("PaymentProofUploaded", new
             {
                 PaymentId = paymentId,
-                CaseId = (int?)null,         // optional later
+                CaseId = (int?)null,
                 UserId = userId,
                 ProofPath = proofPath,
                 Time = DateTime.UtcNow
@@ -305,12 +377,13 @@ namespace DonationManagementSystem.Web.Controllers
             return RedirectToAction(nameof(MyPayments));
         }
 
-        // ✅ MyPayments (via Application workflow)
+        // ✅ My Payments
+        [HttpGet("MyPayments")]
         [Authorize]
         public async Task<IActionResult> MyPayments()
         {
             var userId = _userManager.GetUserId(User)!;
-            var payments = await _paymentWorkflow.GetMyPaymentsAsync(userId);
+            var payments = await _paymentService.GetMyPaymentsAsync(userId);
             return View(payments);
         }
     }

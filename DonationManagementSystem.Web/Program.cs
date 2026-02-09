@@ -6,12 +6,12 @@ using DonationManagementSystem.Infrastructure.Repositories;
 using DonationManagementSystem.Infrastructure.Services;
 using DonationManagementSystem.Web.BackgroundServices;
 using DonationManagementSystem.Web.Hubs;
+using DonationManagementSystem.Web.MappingProfiles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-
-Log.Logger = new LoggerConfiguration()
+    Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
     .WriteTo.File(
@@ -38,36 +38,36 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 }).AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// AutoMapper Registration
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 // MVC
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IPaymentService, PaymentService>();
-builder.Services.AddScoped<PaymentWorkflow>();
-
-
-builder.Services.AddScoped<IDonationCaseService, DonationCaseService>();
-builder.Services.AddScoped<DonationCaseWorkflow>();
-
+// ? Register Services
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDonationCaseService, DonationCaseService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<PaymentService>(); // ? ADD THIS
+builder.Services.AddScoped<DonationCaseWorkflow>();
+builder.Services.AddScoped<PaymentWorkflow>(); // ? ADD THIS
 
+// Background Services
 builder.Services.AddHostedService<DonationCaseAutoCloseService>();
-
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddControllersWithViews();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
 builder.Services.AddHostedService<DonationManagementSystem.Web.BackgroundServices.DonationCaseMonitorService>();
 
+// SignalR
 builder.Services.AddSignalR();
 
-
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 Log.Information("Application started successfully");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -85,13 +85,11 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-    // 1) Create Admin role if it doesn't exist
+    // Create Admin role if it doesn't exist
     if (!await roleManager.RoleExistsAsync("Admin"))
-    
-    await roleManager.CreateAsync(new IdentityRole("Admin"));
-    
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
 
-    // 2) Promote a specific user to Admin (change this email)
+    // Promote a specific user to Admin
     var adminEmail = "jad_wb@hotmail.com";
     var user = await userManager.FindByEmailAsync(adminEmail);
 
@@ -99,32 +97,248 @@ using (var scope = app.Services.CreateScope())
         await userManager.AddToRoleAsync(user, "Admin");
 }
 
-// Pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
-}
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
-
+// ? Make sure this is in the middleware pipeline
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();   // 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapHub<AdminNotificationHub>("/hubs/admin");
+// ? API endpoints mapping
+app.MapControllers(); // ? This line is CRITICAL for API controllers
 
-
+// MVC endpoints mapping
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// This should work with routes like:
+// /Admin/Approve/40 -> AdminController.Approve(40)
+// /Admin/Reject/40 -> AdminController.Reject(40)
+
 app.MapRazorPages();
 
 app.Run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

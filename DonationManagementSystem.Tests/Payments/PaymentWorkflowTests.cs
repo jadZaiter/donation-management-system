@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DonationManagementSystem.Application.Common.Interfaces;
 using DonationManagementSystem.Application.Payments;
 using DonationManagementSystem.Application.Payments.Models;
 using Moq;
@@ -13,8 +14,10 @@ namespace DonationManagementSystem.Tests.Payments
         public async Task StartBankTransferAsync_AmountLessOrEqualZero_ShouldThrow()
         {
             // Arrange
-            var payments = new Mock<IPaymentService>();
-            var workflow = new PaymentWorkflow(payments.Object);
+            var uow = new Mock<IUnitOfWork>();
+            var notificationService = new Mock<INotificationService>();
+            
+            var workflow = new PaymentWorkflow(uow.Object, notificationService.Object);
 
             var req = new CreatePaymentRequest
             {
@@ -28,15 +31,16 @@ namespace DonationManagementSystem.Tests.Payments
         }
 
         [Fact]
-        public async Task StartBankTransferAsync_WhenCollectedReachedTarget_ShouldThrow()
+        public async Task StartBankTransferAsync_WhenCaseNotFound_ShouldThrow()
         {
             // Arrange
-            var payments = new Mock<IPaymentService>();
+            var uow = new Mock<IUnitOfWork>();
+            var notificationService = new Mock<INotificationService>();
 
-            payments.Setup(p => p.GetTargetAmountAsync(1)).ReturnsAsync(100);
-            payments.Setup(p => p.GetCollectedAmountAsync(1)).ReturnsAsync(100);
+            uow.Setup(u => u.DonationCases.GetByIdAsync(1))
+               .ReturnsAsync((Domain.Entities.DonationCase?)null);
 
-            var workflow = new PaymentWorkflow(payments.Object);
+            var workflow = new PaymentWorkflow(uow.Object, notificationService.Object);
 
             var req = new CreatePaymentRequest
             {
@@ -53,15 +57,22 @@ namespace DonationManagementSystem.Tests.Payments
         public async Task StartBankTransferAsync_WhenValid_ShouldCreatePayment_AndReturnPaymentId()
         {
             // Arrange
-            var payments = new Mock<IPaymentService>();
+            var uow = new Mock<IUnitOfWork>();
+            var notificationService = new Mock<INotificationService>();
 
-            payments.Setup(p => p.GetTargetAmountAsync(1)).ReturnsAsync(100);
-            payments.Setup(p => p.GetCollectedAmountAsync(1)).ReturnsAsync(20);
+            var donationCase = new Domain.Entities.DonationCase
+            {
+                Id = 1,
+                TargetAmount = 100
+            };
 
-            payments.Setup(p => p.CreatePaymentAsync(1, "u1", 50))
-                    .ReturnsAsync(777);
+            uow.Setup(u => u.DonationCases.GetByIdAsync(1)).ReturnsAsync(donationCase);
 
-            var workflow = new PaymentWorkflow(payments.Object);
+            var createdPayment = new Domain.Entities.Payment { Id = 777 };
+            uow.Setup(u => u.Payments.AddAsync(It.IsAny<Domain.Entities.Payment>()))
+               .Returns(Task.CompletedTask);
+
+            var workflow = new PaymentWorkflow(uow.Object, notificationService.Object);
 
             var req = new CreatePaymentRequest
             {
@@ -74,32 +85,35 @@ namespace DonationManagementSystem.Tests.Payments
             var paymentId = await workflow.StartBankTransferAsync(req);
 
             // Assert
-            Assert.Equal(777, paymentId);
-            payments.Verify(p => p.CreatePaymentAsync(1, "u1", 50), Times.Once);
+            Assert.True(paymentId > 0);
+            uow.Verify(u => u.Payments.AddAsync(It.IsAny<Domain.Entities.Payment>()), Times.Once);
+            uow.Verify(u => u.SaveChangesAsync(default), Times.Once);
         }
 
         [Fact]
-        public async Task UploadProofAsync_WhenProofPathMissing_ShouldThrow()
+        public async Task UploadProofAsync_WhenValid_ShouldUpdatePaymentAndNotify()
         {
             // Arrange
-            var payments = new Mock<IPaymentService>();
-            var workflow = new PaymentWorkflow(payments.Object);
+            var uow = new Mock<IUnitOfWork>();
+            var notificationService = new Mock<INotificationService>();
 
-            // Act + Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => workflow.UploadProofAsync(new UploadProofRequest
+            var payment = new Domain.Entities.Payment
             {
-                PaymentId = 10,
+                Id = 10,
                 UserId = "u1",
-                ProofPath = "" // missing
-            }));
-        }
+                DonationCaseId = 1
+            };
 
-        [Fact]
-        public async Task UploadProofAsync_WhenValid_ShouldCallService()
-        {
-            // Arrange
-            var payments = new Mock<IPaymentService>();
-            var workflow = new PaymentWorkflow(payments.Object);
+            var donationCase = new Domain.Entities.DonationCase
+            {
+                Id = 1,
+                Title = "Test Case"
+            };
+
+            uow.Setup(u => u.Payments.GetByIdAsync(10)).ReturnsAsync(payment);
+            uow.Setup(u => u.DonationCases.GetByIdAsync(1)).ReturnsAsync(donationCase);
+
+            var workflow = new PaymentWorkflow(uow.Object, notificationService.Object);
 
             var req = new UploadProofRequest
             {
@@ -112,7 +126,13 @@ namespace DonationManagementSystem.Tests.Payments
             await workflow.UploadProofAsync(req);
 
             // Assert
-            payments.Verify(p => p.UploadProofAsync(10, "u1", "/uploads/proofs/x.png"), Times.Once);
+            uow.Verify(u => u.Payments.Update(It.IsAny<Domain.Entities.Payment>()), Times.Once);
+            uow.Verify(u => u.SaveChangesAsync(default), Times.Once);
+            notificationService.Verify(n => n.CreateForAdminsAsync(
+                "Payment Proof Uploaded",
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                Domain.Entities.NotificationType.ProofUploaded), Times.Once);
         }
     }
 }

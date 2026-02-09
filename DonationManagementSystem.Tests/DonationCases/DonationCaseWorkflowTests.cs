@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DonationManagementSystem.Application.Common.Interfaces;
 using DonationManagementSystem.Application.DonationCases;
-using DonationManagementSystem.Application.DonationCases.Models;
 using DonationManagementSystem.Domain.Entities;
 using Moq;
 using Xunit;
@@ -14,47 +14,39 @@ namespace DonationManagementSystem.Tests.DonationCases
         public async Task ApproveAsync_WhenCaseNotFound_ShouldThrow()
         {
             // Arrange
-            var svc = new Mock<IDonationCaseService>();
+            var uow = new Mock<IUnitOfWork>();
+            var notificationService = new Mock<INotificationService>();
 
-            svc.Setup(s => s.GetByIdAsync(999))
+            uow.Setup(u => u.DonationCases.GetByIdAsync(999))
                .ReturnsAsync((DonationCase?)null);
 
-            var workflow = new DonationCaseWorkflow(svc.Object);
+            var workflow = new DonationCaseWorkflow(uow.Object, notificationService.Object);
 
             // Act + Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(() => workflow.ApproveAsync(
-                new ReviewDonationCaseRequest
-                {
-                    CaseId = 999,
-                    AdminId = "admin",
-                    Note = "ok"
-                }));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => workflow.ApproveAsync(999, "admin", "ok"));
         }
 
         [Fact]
-        public async Task ApproveAsync_WhenValid_ShouldSetApprovedAndReviewFields_AndSave()
+        public async Task ApproveAsync_WhenValid_ShouldSetApprovedAndReviewFields_AndNotify()
         {
             // Arrange
-            var svc = new Mock<IDonationCaseService>();
+            var uow = new Mock<IUnitOfWork>();
+            var notificationService = new Mock<INotificationService>();
 
             var c = new DonationCase
             {
                 Id = 1,
                 Title = "Test Case",
+                CreatedByUserId = "user1",
                 Status = CaseStatus.Pending
             };
 
-            svc.Setup(s => s.GetByIdAsync(1)).ReturnsAsync(c);
+            uow.Setup(u => u.DonationCases.GetByIdAsync(1)).ReturnsAsync(c);
 
-            var workflow = new DonationCaseWorkflow(svc.Object);
+            var workflow = new DonationCaseWorkflow(uow.Object, notificationService.Object);
 
             // Act
-            await workflow.ApproveAsync(new ReviewDonationCaseRequest
-            {
-                CaseId = 1,
-                AdminId = "admin1",
-                Note = "approved"
-            });
+            await workflow.ApproveAsync(1, "admin1", "approved");
 
             // Assert
             Assert.Equal(CaseStatus.Approved, c.Status);
@@ -62,33 +54,36 @@ namespace DonationManagementSystem.Tests.DonationCases
             Assert.NotNull(c.ReviewedAt);
             Assert.Equal("approved", c.AdminNote);
 
-            svc.Verify(s => s.SaveAsync(), Times.Once);
+            uow.Verify(u => u.SaveChangesAsync(default), Times.Once);
+            notificationService.Verify(n => n.CreateForUserAsync(
+                "user1",
+                "Case Approved",
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                NotificationType.CaseApproved), Times.Once);
         }
 
         [Fact]
-        public async Task RejectAsync_WhenValid_ShouldSetRejectedAndReviewFields_AndSave()
+        public async Task RejectAsync_WhenValid_ShouldSetRejectedAndReviewFields_AndNotify()
         {
             // Arrange
-            var svc = new Mock<IDonationCaseService>();
+            var uow = new Mock<IUnitOfWork>();
+            var notificationService = new Mock<INotificationService>();
 
             var c = new DonationCase
             {
                 Id = 2,
                 Title = "Reject Case",
+                CreatedByUserId = "user2",
                 Status = CaseStatus.Pending
             };
 
-            svc.Setup(s => s.GetByIdAsync(2)).ReturnsAsync(c);
+            uow.Setup(u => u.DonationCases.GetByIdAsync(2)).ReturnsAsync(c);
 
-            var workflow = new DonationCaseWorkflow(svc.Object);
+            var workflow = new DonationCaseWorkflow(uow.Object, notificationService.Object);
 
             // Act
-            await workflow.RejectAsync(new ReviewDonationCaseRequest
-            {
-                CaseId = 2,
-                AdminId = "admin2",
-                Note = "not valid"
-            });
+            await workflow.RejectAsync(2, "admin2", "not valid");
 
             // Assert
             Assert.Equal(CaseStatus.Rejected, c.Status);
@@ -96,7 +91,13 @@ namespace DonationManagementSystem.Tests.DonationCases
             Assert.NotNull(c.ReviewedAt);
             Assert.Equal("not valid", c.AdminNote);
 
-            svc.Verify(s => s.SaveAsync(), Times.Once);
+            uow.Verify(u => u.SaveChangesAsync(default), Times.Once);
+            notificationService.Verify(n => n.CreateForUserAsync(
+                "user2",
+                "Case Rejected",
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                NotificationType.CaseRejected), Times.Once);
         }
     }
 }

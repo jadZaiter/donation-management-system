@@ -1,0 +1,83 @@
+@page
+@using DonationManagementSystem.Domain.Entities
+@model DonationManagementSystem.Web.Pages.NotificationsModel
+
+@{
+    ViewData["Title"] = "My Notifications";
+}
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>?? My Notifications</h2>
+                @if (Model.Notifications.Any(n => !n.IsRead))
+                {
+                    <form method="post" asp-page-handler="MarkAllRead" style="display: inline;">
+                        <button type="submit" class="btn btn-sm btn-outline-primary">
+                            Mark All as Read
+                        </button>
+                    </form>
+                }
+            </div>
+
+            @if (!Model.Notifications.Any())
+            {
+                <div class="alert alert-info text-center py-5">
+                    <p class="text-muted mb-0">No notifications yet</p>
+                </div>
+            }
+            else
+            {
+                <div class="list-group">
+                    @foreach (var notif in Model.Notifications)
+                    {
+                        <div class="list-group-item @(notif.IsRead ? "" : "bg-light border-primary")">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">
+                                        @notif.Title
+                                        @if (!notif.IsRead)
+                                        {
+                                            <span class="badge bg-primary ms-2">New</span>
+                                        }
+                                    </h6>
+                                    <p class="text-muted mb-2">@notif.Message</p>
+                                    <small class="text-secondary">@notif.CreatedAt.ToString("MMM dd, yyyy h:mm tt")</small>
+                                </div>
+                                <div class="ms-2">
+                                    @if (!notif.IsRead)
+                                    {
+                                        <form method="post" asp-page-handler="MarkRead" asp-route-id="@notif.Id" style="display: inline;">
+                                            <button type="submit" class="btn btn-sm btn-link" title="Mark as read">?</button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(notif.Link))
+                            {
+                                <div class="mt-2">
+                                    <a href="@notif.Link" class="btn btn-sm btn-primary">View</a>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">?? Summary</h6>
+                    <p class="mb-1">
+                        <strong>Unread:</strong> <span class="badge bg-primary">@Model.UnreadCount</span>
+                    </p>
+                    <p class="mb-0">
+                        <strong>Total:</strong> <span>@Model.Notifications.Count</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

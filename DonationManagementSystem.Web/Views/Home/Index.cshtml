@@ -1,120 +1,72 @@
 ﻿@model DonationManagementSystem.Web.ViewModels.HomeIndexViewModel
 
 @{
-    ViewData["Title"] = "Home";
-
-    var f = Model.Featured;
-    var pct = (f == null || f.TargetAmount <= 0)
-        ? 0
-        : (int)Math.Min(100, Math.Round((double)(f.CollectedAmount / f.TargetAmount * 100)));
+    ViewData["Title"] = "Home Page";
 }
 
-@if (Model.Featured == null)
-{
-    <div class="alert alert-info">
-        <strong>No cases available yet</strong> - Check back soon for donation opportunities!
-    </div>
-}
-else
-{
-    <div class="mb-5">
-        <h2 class="mb-4"><strong>Featured Case</strong></h2>
+<div class="container mt-5">
+    <h1 class="mb-4">Featured Donation Cases</h1>
 
-        <div class="card mb-4">
-            <div class="card-body">
-                @if (!string.IsNullOrEmpty(f.ImagePath))
-                {
-                    <img src="@f.ImagePath"
-                         class="img-fluid rounded mb-3"
-                         style="max-height:350px; width:100%; object-fit:cover;" />
-                }
-
-                <h3 class="card-title">@f!.Title</h3>
-                <p class="card-text">@f.Description</p>
-
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <div>
-                            <span class="fw-bold text-primary">@f.CollectedAmount.ToString("C")</span>
-                            <span class="text-muted">of</span>
-                            <span class="fw-bold">@f.TargetAmount.ToString("C")</span>
+    <!-- Featured Cases Grid -->
+    <div class="row mb-5">
+        @foreach (var item in Model.FeaturedCases)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrWhiteSpace(item.Case.ImagePath))
+                    {
+                        <img src="@item.Case.ImagePath" class="card-img-top" style="height: 200px; object-fit: cover;" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Case.Title</h5>
+                        <p class="card-text">@item.Case.Description.Substring(0, Math.Min(100, item.Case.Description.Length))...</p>
+                        
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Collected: <strong>@item.Collected.ToString("C")</strong></span>
+                                <span>Target: <strong>@item.Case.TargetAmount.ToString("C")</strong></span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style="width: @item.ProgressPercent%"></div>
+                            </div>
+                            <small class="text-muted">@item.ProgressPercent% • @item.DonorCount donors</small>
                         </div>
-                        <span class="badge bg-info">@pct%</span>
+                        
+                        <a href="/DonationCases/Details/@item.Case.Id" class="btn btn-primary btn-sm w-100">
+                            View & Donate
+                        </a>
                     </div>
-
-                    <div class="progress mt-2">
-                        <div class="progress-bar bg-success"
-                             role="progressbar"
-                             style="width:@pct%">
-                        </div>
-                    </div>
-
-                    <small class="text-muted">@f.DonorsCount donors contributed</small>
                 </div>
-
-                <a class="btn btn-primary"
-                   href="/DonationCases/Details/@f.Id">
-                    View Details & Donate
-                </a>
             </div>
-        </div>
+        }
     </div>
 
-    <div>
-        <h2 class="mb-4"><strong>More Cases</strong></h2>
-
-    @if (!Model.Others.Any())
+    <!-- Other Cases -->
+    @if (Model.Others.Any())
     {
-        <p class="text-muted">No other cases available at this time.</p>
-    }
-    else
-    {
-        <div class="row g-4">
-            @foreach (var c in Model.Others)
+        <h2 class="mb-4">Other Cases</h2>
+        <div class="row">
+            @foreach (var item in Model.Others)
             {
-                var pct2 = c.TargetAmount <= 0
-                ? 0
-                : (int)Math.Min(100, Math.Round((double)(c.CollectedAmount / c.TargetAmount * 100)));
-
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            @if (!string.IsNullOrEmpty(c.ImagePath))
-                            {
-                                <img src="@c.ImagePath"
-                                     class="img-fluid rounded mb-3"
-                                     style="height:180px; width:100%; object-fit:cover;" />
-                            }
-
-                            <h5 class="card-title">@c.Title</h5>
-
-                            <p class="card-text text-muted">
-                                @(c.Description.Length > 100
-                                                    ? c.Description.Substring(0, 100) + "..."
-                                                    : c.Description)
-                            </p>
-
-                            <div class="mt-auto">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <small class="text-muted">
-                                        <strong>@c.CollectedAmount.ToString("C")</strong> / <strong>@c.TargetAmount.ToString("C")</strong>
-                                    </small>
-                                    <span class="badge bg-light text-dark">@pct2%</span>
-                                </div>
-
-                                <div class="progress mb-2" style="height: 6px;">
-                                    <div class="progress-bar"
-                                         role="progressbar"
-                                         style="width:@pct2%">
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                @if (!string.IsNullOrWhiteSpace(item.Case.ImagePath))
+                                {
+                                    <img src="@item.Case.ImagePath" class="img-fluid" style="height: 150px; object-fit: cover;" />
+                                }
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title">@item.Case.Title</h6>
+                                    <div class="progress mb-2" style="height: 8px;">
+                                        <div class="progress-bar bg-success" style="width: @item.ProgressPercent%"></div>
                                     </div>
+                                    <small class="text-muted">@item.Collected.ToString("C") / @item.Case.TargetAmount.ToString("C")</small>
+                                    <br />
+                                    <a href="/DonationCases/Details/@item.Case.Id" class="btn btn-sm btn-outline-primary mt-2">Donate</a>
                                 </div>
-
-                                <small class="text-muted d-block mb-3">@c.DonorsCount donors</small>
-
-                                <a class="btn btn-primary btn-sm w-100"
-                                   href="/DonationCases/Details/@c.Id">
-                                    View & Donate
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -122,5 +74,11 @@ else
             }
         </div>
     }
+
+    <!-- CTA -->
+    <div class="alert alert-info mt-5">
+        <h4>Want to help?</h4>
+        <p>Browse through our donation cases and help change lives today!</p>
+        <a href="/Home/Search" class="btn btn-primary">Advanced Search</a>
     </div>
-}
+</div>

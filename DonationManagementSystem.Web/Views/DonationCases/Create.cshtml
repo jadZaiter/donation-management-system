@@ -1,59 +1,91 @@
-﻿@model DonationManagementSystem.Web.ViewModels.DonationCaseCreateVm
+@model DonationManagementSystem.Web.ViewModels.DonationCaseCreateVm
 
 @{
     ViewData["Title"] = "Submit Donation Case";
 }
 
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="card">
-            <div class="card-body p-5">
-                <h2 class="card-title mb-4">Submit a Donation Case</h2>
-                <p class="text-muted mb-4">Share your story and create a fundraising campaign. Please provide accurate information.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-5">
+                    <h2 class="card-title mb-4">Submit a Donation Case</h2>
 
-                @if (TempData["Message"] != null)
-                {
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        @TempData["Message"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                }
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show">
+                            @TempData["Message"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
 
-                <form asp-action="Create" method="post" enctype="multipart/form-data">
-                    @Html.AntiForgeryToken()
+                    <form method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
 
-                    <div class="mb-4">
-                        <label asp-for="Title" class="form-label">Case Title</label>
-                        <input asp-for="Title" class="form-control form-control-lg" placeholder="Give your case a clear, descriptive title" />
-                        <span asp-validation-for="Title" class="text-danger d-block mt-1"></span>
-                    </div>
-
-                    <div class="mb-4">
-                        <label asp-for="Description" class="form-label">Description</label>
-                        <textarea asp-for="Description" class="form-control" rows="6" placeholder="Provide detailed information about your case, situation, and why you need support..."></textarea>
-                        <span asp-validation-for="Description" class="text-danger d-block mt-1"></span>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-                            <label asp-for="TargetAmount" class="form-label">Target Amount</label>
-                            <input asp-for="TargetAmount" type="number" step="0.01" class="form-control form-control-lg" placeholder="0.00" />
-                            <span asp-validation-for="TargetAmount" class="text-danger d-block mt-1"></span>
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Case Title *</label>
+                            <input asp-for="Title" class="form-control" placeholder="e.g., Help Build a School" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
 
-                        <div class="col-md-6 mb-4">
-                            <label asp-for="ImageFile" class="form-label">Cover Image</label>
-                            <input asp-for="ImageFile" type="file" class="form-control form-control-lg" accept="image/*" />
-                            <span asp-validation-for="ImageFile" class="text-danger d-block mt-1"></span>
-                            <small class="text-muted d-block mt-2">Recommended: JPG or PNG, up to 5MB</small>
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Description *</label>
+                            <textarea asp-for="Description" class="form-control" rows="5" placeholder="Describe the case and why you need help..."></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
-                    </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">Submit Case</button>
-                        <a href="/Home/Index" class="btn btn-outline-secondary btn-lg">Cancel</a>
-                    </div>
-                </form>
+                        <div class="mb-3">
+                            <label asp-for="TargetAmount" class="form-label">Target Amount ($) *</label>
+                            <input asp-for="TargetAmount" class="form-control" type="number" step="0.01" min="1" placeholder="5000" />
+                            <span asp-validation-for="TargetAmount" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CategoryId" class="form-label">Category *</label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+                                <option value="">-- Select Category --</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tags</label>
+                            <div class="row">
+                                @if (ViewBag.Tags != null)
+                                {
+                                    @foreach (var tag in ViewBag.Tags)
+                                    {
+                                        <div class="col-md-6 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="TagIds" 
+                                                       value="@tag.Id" id="tag_@tag.Id" />
+                                                <label class="form-check-label" for="tag_@tag.Id">
+                                                    @tag.Name
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ImageFile" class="form-label">Case Image (JPG/PNG, Max 5MB)</label>
+                            <input asp-for="ImageFile" class="form-control" type="file" accept="image/jpeg,image/png" />
+                            <small class="text-muted">Optional: Upload an image to illustrate your case</small>
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg flex-grow-1">
+                                Submit Case
+                            </button>
+                            <a href="/" class="btn btn-secondary btn-lg">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

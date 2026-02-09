@@ -33,10 +33,14 @@ namespace DonationManagementSystem.Domain.Entities
         public string? ReviewedByUserId { get; set; }
         public DateTime? ReviewedAt { get; set; }
         public string? AdminNote { get; set; }
-   
+        
+        // Category Foreign Key
+        public int CategoryId { get; set; }
+        public Category? Category { get; set; }
 
         // Navigation
         public ICollection<Donation> Donations { get; set; } = new List<Donation>();
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<DonationCaseTag> DonationCaseTags { get; set; } = new List<DonationCaseTag>();
     }
 }

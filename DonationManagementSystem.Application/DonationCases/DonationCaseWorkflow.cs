@@ -3,56 +3,90 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DonationManagementSystem.Application.DonationCases.Models;
+using DonationManagementSystem.Application.Common.Interfaces;
 using DonationManagementSystem.Domain.Entities;
-using Serilog;
-
-
 
 namespace DonationManagementSystem.Application.DonationCases
 {
     public class DonationCaseWorkflow
     {
-        private readonly IDonationCaseService _cases;
+        private readonly IUnitOfWork _uow;
+        private readonly INotificationService _notificationService;
 
-        public DonationCaseWorkflow(IDonationCaseService cases)
+        public DonationCaseWorkflow(IUnitOfWork uow, INotificationService notificationService)
         {
-            _cases = cases;
+            _uow = uow;
+            _notificationService = notificationService;
         }
 
-        public async Task ApproveAsync(ReviewDonationCaseRequest req)
+        // ✅ When case is submitted
+        public async Task SubmitAsync(DonationCase donationCase)
         {
-            var donationCase = await _cases.GetByIdAsync(req.CaseId);
+            donationCase.Status = CaseStatus.Pending;
+            donationCase.CreatedAt = DateTime.UtcNow;
+
+            await _uow.DonationCases.AddAsync(donationCase);
+            await _uow.SaveChangesAsync();
+
+            // ✅ Notify admins
+            await _notificationService.CreateForAdminsAsync(
+                title: "New Case Submitted",
+                message: $"New donation case submitted: {donationCase.Title}",
+                link: $"/DonationCases/Details/{donationCase.Id}",
+                type: NotificationType.CaseSubmitted
+            );
+        }
+
+        // ✅ When case is approved
+        public async Task ApproveAsync(int caseId, string adminUserId, string? note)
+        {
+            var donationCase = await _uow.DonationCases.GetByIdAsync(caseId);
+
             if (donationCase == null)
                 throw new InvalidOperationException("Case not found.");
 
-            if (donationCase.Status != CaseStatus.Pending)
-                throw new InvalidOperationException("Only pending cases can be approved.");
-
             donationCase.Status = CaseStatus.Approved;
-            donationCase.ReviewedByUserId = req.AdminId;
             donationCase.ReviewedAt = DateTime.UtcNow;
-            donationCase.AdminNote = req.Note;
-            Log.Information("Donation case approved. CaseId: {CaseId}, AdminId: {AdminId}",
-    req.CaseId, req.AdminId);
+            donationCase.ReviewedByUserId = adminUserId;
+            donationCase.AdminNote = note;
 
-            await _cases.SaveAsync();
+            _uow.DonationCases.Update(donationCase);
+            await _uow.SaveChangesAsync();
+
+            // ✅ Notify user who submitted
+            await _notificationService.CreateForUserAsync(
+                userId: donationCase.CreatedByUserId,
+                title: "Case Approved",
+                message: $"Your case '{donationCase.Title}' has been approved!",
+                link: $"/DonationCases/Details/{donationCase.Id}", // ✅ This is correct
+                type: NotificationType.CaseApproved
+            );
         }
 
-        public async Task RejectAsync(ReviewDonationCaseRequest req)
+        // ✅ When case is rejected
+        public async Task RejectAsync(int caseId, string adminUserId, string? note)
         {
-            var donationCase = await _cases.GetByIdAsync(req.CaseId);
+            var donationCase = await _uow.DonationCases.GetByIdAsync(caseId);
+
             if (donationCase == null)
                 throw new InvalidOperationException("Case not found.");
 
             donationCase.Status = CaseStatus.Rejected;
-            donationCase.ReviewedByUserId = req.AdminId;
             donationCase.ReviewedAt = DateTime.UtcNow;
-            donationCase.AdminNote = req.Note;
-            Log.Warning("Donation case rejected. CaseId: {CaseId}, AdminId: {AdminId}, Note: {Note}",
-    req.CaseId, req.AdminId, req.Note);
+            donationCase.ReviewedByUserId = adminUserId;
+            donationCase.AdminNote = note;
 
-            await _cases.SaveAsync();
+            _uow.DonationCases.Update(donationCase);
+            await _uow.SaveChangesAsync();
+
+            // ✅ Notify user who submitted
+            await _notificationService.CreateForUserAsync(
+                userId: donationCase.CreatedByUserId,
+                title: "Case Rejected",
+                message: $"Your case '{donationCase.Title}' was not approved. Reason: {note}",
+                link: $"/DonationCases/Details/{donationCase.Id}", // ✅ This is correct
+                type: NotificationType.CaseRejected
+            );
         }
     }
 }

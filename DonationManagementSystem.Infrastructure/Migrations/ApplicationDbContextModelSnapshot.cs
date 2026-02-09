@@ -22,6 +22,30 @@ namespace DonationManagementSystem.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -90,6 +114,9 @@ namespace DonationManagementSystem.Infrastructure.Migrations
                     b.Property<string>("AdminNote")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -122,7 +149,24 @@ namespace DonationManagementSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("DonationCases");
+                });
+
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.DonationCaseTag", b =>
+                {
+                    b.Property<int>("DonationCaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DonationCaseId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("DonationCaseTags");
                 });
 
             modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Payment", b =>
@@ -169,6 +213,30 @@ namespace DonationManagementSystem.Infrastructure.Migrations
                     b.HasIndex("DonationCaseId");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -395,6 +463,36 @@ namespace DonationManagementSystem.Infrastructure.Migrations
                     b.Navigation("DonationCase");
                 });
 
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.DonationCase", b =>
+                {
+                    b.HasOne("DonationManagementSystem.Domain.Entities.Category", "Category")
+                        .WithMany("DonationCases")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.DonationCaseTag", b =>
+                {
+                    b.HasOne("DonationManagementSystem.Domain.Entities.DonationCase", "DonationCase")
+                        .WithMany("DonationCaseTags")
+                        .HasForeignKey("DonationCaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DonationManagementSystem.Domain.Entities.Tag", "Tag")
+                        .WithMany("DonationCaseTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DonationCase");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Payment", b =>
                 {
                     b.HasOne("DonationManagementSystem.Domain.Entities.DonationCase", "DonationCase")
@@ -457,11 +555,23 @@ namespace DonationManagementSystem.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("DonationCases");
+                });
+
             modelBuilder.Entity("DonationManagementSystem.Domain.Entities.DonationCase", b =>
                 {
                     b.Navigation("Comments");
 
+                    b.Navigation("DonationCaseTags");
+
                     b.Navigation("Donations");
+                });
+
+            modelBuilder.Entity("DonationManagementSystem.Domain.Entities.Tag", b =>
+                {
+                    b.Navigation("DonationCaseTags");
                 });
 #pragma warning restore 612, 618
         }

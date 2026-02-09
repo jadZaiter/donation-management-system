@@ -1,20 +1,23 @@
-﻿namespace DonationManagementSystem.Web.ViewModels
+﻿using DonationManagementSystem.Application.DonationCases.Dtos;
+using DonationManagementSystem.Domain.Entities;
+
+namespace DonationManagementSystem.Web.ViewModels
 {
+    /// <summary>
+    /// Home page view model - displays featured and recent cases with category/tag filters
+    /// </summary>
     public class HomeIndexViewModel
     {
-        public DonationCaseCardVm? Featured { get; set; }
-        public List<DonationCaseCardVm> Others { get; set; } = new();
+        public List<CaseWithAmountDto> FeaturedCases { get; set; } = new(); // ✅ RENAME from Featured
+        public List<Category> Categories { get; set; } = new(); // ✅ ADD THIS
+        public List<CaseWithAmountDto> Others { get; set; } = new(); // ✅ ADD THIS
     }
 
-    public class DonationCaseCardVm
+    public class CaseWithAmountDto
     {
-        public string? ImagePath { get; set; }
-        public int Id { get; set; }
-        public string Title { get; set; } = "";
-        public string Description { get; set; } = "";
-        public decimal TargetAmount { get; set; }
-        public decimal CollectedAmount { get; set; }
-        public int DonorsCount { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DonationCase Case { get; set; } = null!; // ✅ Use null! to suppress warning
+        public decimal Collected { get; set; }
+        public int DonorCount { get; set; }
+        public int ProgressPercent { get; set; }
     }
 }

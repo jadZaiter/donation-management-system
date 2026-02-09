@@ -1,171 +1,52 @@
-﻿@model DonationManagementSystem.Web.ViewModels.Dashboard.UserDashboardVm
 @{
-    ViewData["Title"] = "My Dashboard";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="mb-4">
-    <h2>My Dashboard</h2>
-    <p class="text-muted">Overview of your cases and donations</p>
-</div>
+<div class="container mt-5">
+    <h2 class="mb-4">Dashboard</h2>
 
-<div class="row mb-5 g-4">
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <p class="text-muted mb-1">My Cases</p>
-                        <h3 class="mb-0">@Model.MyCasesCount</h3>
-                    </div>
-                    <span style="font-size: 2rem;">📋</span>
+    <div class="row">
+        <!-- My Cases Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">My Cases</h5>
+                    <p class="card-text text-muted">View and manage your submitted donation cases</p>
+                    <a href="/DonationCases/MyCases" class="btn btn-primary">View My Cases</a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <p class="text-muted mb-1">Payments</p>
-                        <h3 class="mb-0">@Model.MyPaymentsCount</h3>
-                    </div>
-                    <span style="font-size: 2rem;">💳</span>
+        <!-- My Payments Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">My Payments</h5>
+                    <p class="card-text text-muted">Track your donations and payment status</p>
+                    <a href="/DonationCases/MyPayments" class="btn btn-primary">View My Payments</a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <p class="text-muted mb-1">Total Donated</p>
-                        <h3 class="mb-0">@Model.TotalDonatedApproved</h3>
-                    </div>
-                    <span style="font-size: 2rem;">❤️</span>
+        <!-- Browse Cases Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Browse Cases</h5>
+                    <p class="card-text text-muted">Discover and support other donation cases</p>
+                    <a href="/Home/Search" class="btn btn-primary">Search Cases</a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <p class="text-muted mb-1">Payment Status</p>
-                    <div class="d-flex gap-2">
-                        <span class="badge bg-warning">@Model.PendingPaymentsCount</span>
-                        <span class="badge bg-success">@Model.ApprovedPaymentsCount</span>
-                        <span class="badge bg-danger">@Model.RejectedPaymentsCount</span>
-                    </div>
+        <!-- Submit Case Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Submit Case</h5>
+                    <p class="card-text text-muted">Create a new donation case to help others</p>
+                    <a href="/DonationCases/Create" class="btn btn-primary">Submit New Case</a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row g-4">
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title mb-4">Latest Cases</h5>
-                @if (!Model.LatestCases.Any())
-                {
-                    <p class="text-muted">You haven't submitted any cases yet.</p>
-                }
-                else
-                {
-                    <div class="table-responsive">
-                        <table class="table table-sm mb-0">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var c in Model.LatestCases)
-                                {
-                                    <tr>
-                                        <td>
-                                            <strong>@(c.Title.Length > 30 ? c.Title.Substring(0, 30) + "..." : c.Title)</strong>
-                                        </td>
-                                        <td>
-                                            @if (c.Status.ToString() == "Approved")
-                                            {
-                                                <span class="badge bg-success">Approved</span>
-                                            }
-                                            else if (c.Status.ToString() == "Pending")
-                                            {
-                                                <span class="badge bg-warning">Pending</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge bg-danger">Rejected</span>
-                                            }
-                                        </td>
-                                        <td><small>@c.CreatedAt.ToString("yyyy-MM-dd")</small></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title mb-4">Recent Payments</h5>
-                @if (!Model.LatestPayments.Any())
-                {
-                    <p class="text-muted">No payment history yet.</p>
-                }
-                else
-                {
-                    <div class="table-responsive">
-                        <table class="table table-sm mb-0">
-                            <thead>
-                                <tr>
-                                    <th>Case</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var p in Model.LatestPayments)
-                                {
-                                    <tr>
-                                        <td>
-                                            <strong>@(p.DonationCase?.Title != null && p.DonationCase.Title.Length > 25 ? p.DonationCase.Title.Substring(0, 25) + "..." : p.DonationCase?.Title)</strong>
-                                        </td>
-                                        <td>@p.Amount.ToString("C")</td>
-                                        <td>
-                                            @if (p.Status.ToString() == "Approved")
-                                            {
-                                                <span class="badge bg-success">Approved</span>
-                                            }
-                                            else if (p.Status.ToString() == "Pending")
-                                            {
-                                                <span class="badge bg-warning">Pending</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge bg-danger">Rejected</span>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
             </div>
         </div>
     </div>

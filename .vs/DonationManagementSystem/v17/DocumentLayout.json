@@ -1,18 +1,202 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\",
+  "WorkspaceRootPath": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (5)\\donation-management-system\\donationmanagementsystem.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (5)\\donation-management-system\\donationmanagementsystem.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (5)\\donation-management-system\\donationmanagementsystem.web\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\controllers\\donationcasescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\controllers\\donationcasescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\donationcases\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\donationcases\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\donationcases\\uploadproof.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\donationcases\\uploadproof.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\donationcases\\mypayments.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\donationcases\\mypayments.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\donationcases\\mycases.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\donationcases\\mycases.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\donationcases\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\donationcases\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\home\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\home\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.application\\donationcases\\dtos\\donationcasesearchresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|solutionrelative:donationmanagementsystem.application\\donationcases\\dtos\\donationcasesearchresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\services\\donationcaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\services\\donationcaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\admin\\reject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\admin\\reject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\admin\\approve.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\admin\\approve.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\admin\\pendingcases.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\admin\\pendingcases.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\viewmodels\\homeindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\viewmodels\\homeindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.application\\payments\\paymentworkflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|solutionrelative:donationmanagementsystem.application\\payments\\paymentworkflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\controllers\\notificationsapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\controllers\\notificationsapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.application\\donationcases\\donationcaseworkflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|solutionrelative:donationmanagementsystem.application\\donationcases\\donationcaseworkflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\migrations\\20260205215636_addnotifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\migrations\\20260205215636_addnotifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\migrations\\[datestamp]_seedcategoriesandtags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\migrations\\[datestamp]_seedcategoriesandtags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\pages\\notifications.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\pages\\notifications.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.tests\\payments\\paymentworkflowtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|solutionrelative:donationmanagementsystem.tests\\payments\\paymentworkflowtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.tests\\donationcases\\donationcaseworkflowtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|solutionrelative:donationmanagementsystem.tests\\donationcases\\donationcaseworkflowtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|solutionrelative:donationmanagementsystem.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.tests\\application\\donationcases\\donationcaseservicesearchtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|solutionrelative:donationmanagementsystem.tests\\application\\donationcases\\donationcaseservicesearchtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\pages\\notifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\pages\\notifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.application\\common\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|solutionrelative:donationmanagementsystem.application\\common\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.application\\common\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|solutionrelative:donationmanagementsystem.application\\common\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.domain\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|solutionrelative:donationmanagementsystem.domain\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\mappingprofiles\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\mappingprofiles\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.tests\\donationmanagementsystem.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{B2EF3112-B4CD-440F-837C-97E12948937E}|DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj|solutionrelative:donationmanagementsystem.tests\\donationmanagementsystem.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.application\\donationcases\\idonationcaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64E9FA38-40A1-47F6-89A2-692E8194B04E}|DonationManagementSystem.Application\\DonationManagementSystem.Application.csproj|solutionrelative:donationmanagementsystem.application\\donationcases\\idonationcaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\migrations\\20260205_addsearchindexes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\migrations\\20260205_addsearchindexes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\viewmodels\\donationcasecreatevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\viewmodels\\donationcasecreatevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.domain\\entities\\donationcase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|solutionrelative:donationmanagementsystem.domain\\entities\\donationcase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.web\\viewmodels\\donationcaseeditvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42311741-CD80-4701-A152-AABE1E9F86F2}|DonationManagementSystem.Web\\DonationManagementSystem.Web.csproj|solutionrelative:donationmanagementsystem.web\\viewmodels\\donationcaseeditvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.domain\\entities\\donationcasetag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|solutionrelative:donationmanagementsystem.domain\\entities\\donationcasetag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.domain\\entities\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|solutionrelative:donationmanagementsystem.domain\\entities\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00A8FF45-72D5-4AEA-AB5A-C71D6D61E3C8}|DonationManagementSystem.Domain\\DonationManagementSystem.Domain.csproj|solutionrelative:donationmanagementsystem.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|c:\\users\\pc\\desktop\\new folder (7)\\donation-management-system\\donationmanagementsystem.infrastructure\\migrations\\20260205202721_addcategorytaganddonationcasetag1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A10F374A-28E2-4AD8-9A27-B4E1AA797D3E}|DonationManagementSystem.Infrastructure\\DonationManagementSystem.Infrastructure.csproj|solutionrelative:donationmanagementsystem.infrastructure\\migrations\\20260205202721_addcategorytaganddonationcasetag1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,50 +206,600 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\Create.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\DonationCases\\Create.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\Create.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\DonationCases\\Create.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAEwF8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T16:23:36.566Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "DonationCasesController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\DonationCasesController.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Controllers\\DonationCasesController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\DonationCasesController.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Controllers\\DonationCasesController.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAcwNsAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:05:25.455Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\Details.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\DonationCases\\Details.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\Details.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\DonationCases\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T14:56:27.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MyCases.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\MyCases.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\DonationCases\\MyCases.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\MyCases.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\DonationCases\\MyCases.cshtml",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T16:46:08.212Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MyPayments.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\MyPayments.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\DonationCases\\MyPayments.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\MyPayments.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\DonationCases\\MyPayments.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T16:46:28.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\appsettings.json",
               "RelativeDocumentMoniker": "DonationManagementSystem.Web\\appsettings.json",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\appsettings.json",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\appsettings.json",
               "RelativeToolTip": "DonationManagementSystem.Web\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-01-24T22:04:52.913Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\Program.cs",
-              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Program.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\Program.cs",
-              "RelativeToolTip": "DonationManagementSystem.Web\\Program.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAcwFoAAAAEAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "DonationCaseSearchResultDto.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\DonationCases\\Dtos\\DonationCaseSearchResultDto.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Application\\DonationCases\\Dtos\\DonationCaseSearchResultDto.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\DonationCases\\Dtos\\DonationCaseSearchResultDto.cs",
+              "RelativeToolTip": "DonationManagementSystem.Application\\DonationCases\\Dtos\\DonationCaseSearchResultDto.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAmwEQAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T22:04:11.281Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-09T16:07:15.128Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
-              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (5)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
-              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBZwAgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T16:24:46.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Home\\Search.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Home\\Search.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Home\\Search.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Home\\Search.cshtml",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAUwNkAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-24T21:17:48.611Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-09T15:53:21.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwDQAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T16:24:41.174Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UploadProof.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\UploadProof.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\DonationCases\\UploadProof.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\DonationCases\\UploadProof.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\DonationCases\\UploadProof.cshtml",
+              "ViewState": "AgIAADoAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T16:46:39.246Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PendingCases.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Admin\\PendingCases.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Admin\\PendingCases.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Admin\\PendingCases.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Admin\\PendingCases.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T15:51:10.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DonationCaseService.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Services\\DonationCaseService.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Services\\DonationCaseService.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Services\\DonationCaseService.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Services\\DonationCaseService.cs",
+              "ViewState": "AgIAALQAAAAAAAAAAAAAAEcAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:46:36.738Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Reject.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Admin\\Reject.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Admin\\Reject.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Admin\\Reject.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Admin\\Reject.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T15:51:17.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAvwAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:05:40.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T20:19:15.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "HomeIndexViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\ViewModels\\HomeIndexViewModel.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\ViewModels\\HomeIndexViewModel.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\ViewModels\\HomeIndexViewModel.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\ViewModels\\HomeIndexViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:42.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Program.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Program.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Program.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Program.cs",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAmwGYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T22:04:11.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAewIcAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:42:10.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Approve.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Admin\\Approve.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Admin\\Approve.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Admin\\Approve.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Admin\\Approve.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T15:51:14.297Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Tests\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\UnitTest1.cs",
+              "RelativeToolTip": "DonationManagementSystem.Tests\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:48:57.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAArwBsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:35.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "PaymentWorkflowTests.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\Payments\\PaymentWorkflowTests.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Tests\\Payments\\PaymentWorkflowTests.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\Payments\\PaymentWorkflowTests.cs",
+              "RelativeToolTip": "DonationManagementSystem.Tests\\Payments\\PaymentWorkflowTests.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAwwF0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:51:40.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PaymentWorkflow.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\Payments\\PaymentWorkflow.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Application\\Payments\\PaymentWorkflow.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\Payments\\PaymentWorkflow.cs",
+              "RelativeToolTip": "DonationManagementSystem.Application\\Payments\\PaymentWorkflow.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAMwAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:33:18.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "NotificationsApiController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\NotificationsApiController.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Controllers\\NotificationsApiController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Controllers\\NotificationsApiController.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Controllers\\NotificationsApiController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAqwGIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:33:44.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "20260205215636_AddNotifications.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\20260205215636_AddNotifications.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Migrations\\20260205215636_AddNotifications.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\20260205215636_AddNotifications.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Migrations\\20260205215636_AddNotifications.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:56:36.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DonationCaseWorkflow.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\DonationCases\\DonationCaseWorkflow.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Application\\DonationCases\\DonationCaseWorkflow.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\DonationCases\\DonationCaseWorkflow.cs",
+              "RelativeToolTip": "DonationManagementSystem.Application\\DonationCases\\DonationCaseWorkflow.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAewD8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:33:07.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "PaymentService.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Services\\PaymentService.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Services\\PaymentService.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Services\\PaymentService.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Services\\PaymentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:46:04.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAKcAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T22:27:57.394Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Notifications.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Pages\\Notifications.cshtml.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Pages\\Notifications.cshtml.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Pages\\Notifications.cshtml.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Pages\\Notifications.cshtml.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAA4AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:33:31.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "DonationCaseWorkflowTests.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\DonationCases\\DonationCaseWorkflowTests.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Tests\\DonationCases\\DonationCaseWorkflowTests.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\DonationCases\\DonationCaseWorkflowTests.cs",
+              "RelativeToolTip": "DonationManagementSystem.Tests\\DonationCases\\DonationCaseWorkflowTests.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAwwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:49:14.9Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "[DateStamp]_SeedCategoriesAndTags.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\[DateStamp]_SeedCategoriesAndTags.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Migrations\\[DateStamp]_SeedCategoriesAndTags.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\[DateStamp]_SeedCategoriesAndTags.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Migrations\\[DateStamp]_SeedCategoriesAndTags.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:05:22.297Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Notifications.cshtml",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Pages\\Notifications.cshtml",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\Pages\\Notifications.cshtml",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\Pages\\Notifications.cshtml",
+              "RelativeToolTip": "DonationManagementSystem.Web\\Pages\\Notifications.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T21:33:27.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "DonationCaseServiceSearchTests.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\Application\\DonationCases\\DonationCaseServiceSearchTests.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Tests\\Application\\DonationCases\\DonationCaseServiceSearchTests.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\Application\\DonationCases\\DonationCaseServiceSearchTests.cs",
+              "RelativeToolTip": "DonationManagementSystem.Tests\\Application\\DonationCases\\DonationCaseServiceSearchTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:47:08.054Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAlwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:32:38.423Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\Common\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Application\\Common\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\Common\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "DonationManagementSystem.Application\\Common\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:32:33.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "INotificationService.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\Common\\Interfaces\\INotificationService.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Application\\Common\\Interfaces\\INotificationService.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\Common\\Interfaces\\INotificationService.cs",
+              "RelativeToolTip": "DonationManagementSystem.Application\\Common\\Interfaces\\INotificationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:32:30.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\Notification.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Domain\\Entities\\Notification.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\Notification.cs",
+              "RelativeToolTip": "DonationManagementSystem.Domain\\Entities\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T21:32:27.293Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\MappingProfiles\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\MappingProfiles\\MappingProfile.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\MappingProfiles\\MappingProfile.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\MappingProfiles\\MappingProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:45.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "DonationManagementSystem.Tests.csproj",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj",
+              "RelativeToolTip": "DonationManagementSystem.Tests\\DonationManagementSystem.Tests.csproj",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-05T21:11:31.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "IDonationCaseService.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\DonationCases\\IDonationCaseService.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Application\\DonationCases\\IDonationCaseService.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Application\\DonationCases\\IDonationCaseService.cs",
+              "RelativeToolTip": "DonationManagementSystem.Application\\DonationCases\\IDonationCaseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:46:25.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "20260205_AddSearchIndexes.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\20260205_AddSearchIndexes.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Migrations\\20260205_AddSearchIndexes.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\20260205_AddSearchIndexes.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Migrations\\20260205_AddSearchIndexes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:47:03.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "20260205202721_AddCategoryTagAndDonationCaseTag1.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\20260205202721_AddCategoryTagAndDonationCaseTag1.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Infrastructure\\Migrations\\20260205202721_AddCategoryTagAndDonationCaseTag1.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Infrastructure\\Migrations\\20260205202721_AddCategoryTagAndDonationCaseTag1.cs",
+              "RelativeToolTip": "DonationManagementSystem.Infrastructure\\Migrations\\20260205202721_AddCategoryTagAndDonationCaseTag1.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAcwK8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:27:21.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "DonationCase.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\DonationCase.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Domain\\Entities\\DonationCase.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\DonationCase.cs",
+              "RelativeToolTip": "DonationManagementSystem.Domain\\Entities\\DonationCase.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAA9wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:32.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "DonationCaseCreateVm.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\ViewModels\\DonationCaseCreateVm.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\ViewModels\\DonationCaseCreateVm.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\ViewModels\\DonationCaseCreateVm.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\ViewModels\\DonationCaseCreateVm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:38.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "DonationCaseEditVm.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\ViewModels\\DonationCaseEditVm.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Web\\ViewModels\\DonationCaseEditVm.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Web\\ViewModels\\DonationCaseEditVm.cs",
+              "RelativeToolTip": "DonationManagementSystem.Web\\ViewModels\\DonationCaseEditVm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:40.586Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "DonationCaseTag.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\DonationCaseTag.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Domain\\Entities\\DonationCaseTag.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\DonationCaseTag.cs",
+              "RelativeToolTip": "DonationManagementSystem.Domain\\Entities\\DonationCaseTag.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:31.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Tag.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\Tag.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Domain\\Entities\\Tag.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\Tag.cs",
+              "RelativeToolTip": "DonationManagementSystem.Domain\\Entities\\Tag.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:29.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "DonationManagementSystem.Domain\\Entities\\Category.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\New folder (7)\\donation-management-system\\DonationManagementSystem.Domain\\Entities\\Category.cs",
+              "RelativeToolTip": "DonationManagementSystem.Domain\\Entities\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:03:24.049Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

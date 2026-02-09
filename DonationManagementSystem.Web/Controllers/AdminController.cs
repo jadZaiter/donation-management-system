@@ -1,9 +1,10 @@
-﻿using DonationManagementSystem.Application.DonationCases;
-using DonationManagementSystem.Application.DonationCases.Models;
+﻿using DonationManagementSystem.Application.Common.Interfaces;
+using DonationManagementSystem.Application.DonationCases;
 using DonationManagementSystem.Application.Payments;
 using DonationManagementSystem.Application.Payments.Models;
 using DonationManagementSystem.Domain.Entities;
 using DonationManagementSystem.Infrastructure.Data;
+using DonationManagementSystem.Infrastructure.Services; // ✅ ADD THIS
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,26 +14,34 @@ using Microsoft.AspNetCore.Identity;
 namespace DonationManagementSystem.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
+    [Route("Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly PaymentWorkflow _paymentWorkflow;
         private readonly DonationCaseWorkflow _caseWorkflow;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotificationService _notificationService;
+        private readonly PaymentService _paymentService; // ✅ ADD THIS
 
         public AdminController(
             ApplicationDbContext db,
             PaymentWorkflow paymentWorkflow,
             DonationCaseWorkflow caseWorkflow,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            INotificationService notificationService,
+            PaymentService paymentService) // ✅ ADD THIS
         {
             _db = db;
             _paymentWorkflow = paymentWorkflow;
             _caseWorkflow = caseWorkflow;
             _userManager = userManager;
+            _notificationService = notificationService;
+            _paymentService = paymentService; // ✅ ADD THIS
         }
 
-        // ✅ List pending cases (listing only; OK to stay in Web for now)
+        // ✅ List pending cases
+        [HttpGet("PendingCases")]
         public async Task<IActionResult> PendingCases()
         {
             var cases = await _db.DonationCases
@@ -44,82 +53,142 @@ namespace DonationManagementSystem.Web.Controllers
             return View(cases);
         }
 
-        // ✅ Approve case (moved to Application)
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Approve(int id, string? note)
+        // ✅ Approve case - GET (show form)
+        [HttpGet("Approve/{caseId}")]
+        public async Task<IActionResult> Approve(int caseId)
         {
-            var adminId = _userManager.GetUserId(User) ?? "admin";
+            var donationCase = await _db.DonationCases
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == caseId);
 
+            if (donationCase == null)
+                return NotFound();
 
-            await _caseWorkflow.ApproveAsync(new ReviewDonationCaseRequest
+            ViewBag.CaseId = caseId;
+            ViewBag.CaseTitle = donationCase.Title;
+            return View();
+        }
+
+        // ✅ Approve case - POST (execute approval)
+        [HttpPost("ApproveConfirm")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApproveConfirm(int caseId, string? note)
+        {
+            var adminId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(adminId))
+                return Unauthorized();
+
+            try
             {
-                CaseId = id,
-                AdminId = adminId,
-                Note = note
-            });
+                await _caseWorkflow.ApproveAsync(caseId, adminId, note);
+                TempData["Message"] = "Case approved successfully.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
 
             return RedirectToAction(nameof(PendingCases));
         }
 
-        // ✅ Reject case (moved to Application)
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reject(int id, string? note)
+        // ✅ Reject case - GET (show form)
+        [HttpGet("Reject/{caseId}")]
+        public async Task<IActionResult> Reject(int caseId)
         {
-            var adminId = _userManager.GetUserId(User) ?? "admin";
+            var donationCase = await _db.DonationCases
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == caseId);
 
+            if (donationCase == null)
+                return NotFound();
 
-            await _caseWorkflow.RejectAsync(new ReviewDonationCaseRequest
+            ViewBag.CaseId = caseId;
+            ViewBag.CaseTitle = donationCase.Title;
+            return View();
+        }
+
+        // ✅ Reject case - POST (execute rejection)
+        [HttpPost("RejectConfirm")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectConfirm(int caseId, string? note)
+        {
+            var adminId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(adminId))
+                return Unauthorized();
+
+            try
             {
-                CaseId = id,
-                AdminId = adminId,
-                Note = note
-            });
+                await _caseWorkflow.RejectAsync(caseId, adminId, note);
+                TempData["Message"] = "Case rejected successfully.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
 
             return RedirectToAction(nameof(PendingCases));
         }
 
-        // ✅ Payments review (ProofUploaded)
+        // ✅ Pending payments review - UPDATED
+        [HttpGet("PendingPayments")]
         public async Task<IActionResult> PendingPayments()
         {
-            var list = await _paymentWorkflow.GetPendingReviewAsync();
+                var list = await _paymentService.GetPendingReviewAsync(); // ✅ CHANGED
             return View(list);
         }
 
-        [HttpPost]
+        // ✅ Approve payment
+        [HttpPost("ApprovePayment")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ApprovePayment(int paymentId, string? note)
         {
             var adminId = _userManager.GetUserId(User) ?? "admin";
 
-
-            await _paymentWorkflow.ApproveAsync(new ReviewPaymentRequest
+            try
             {
-                PaymentId = paymentId,
-                AdminId = adminId,
-                Note = note
-            });
+                await _paymentWorkflow.ApproveAsync(new ReviewPaymentRequest
+                {
+                    PaymentId = paymentId,
+                    AdminId = adminId,
+                    Note = note
+                });
+                TempData["Message"] = "Payment approved successfully.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
 
             return RedirectToAction(nameof(PendingPayments));
         }
 
-        [HttpPost]
+        // ✅ Reject payment
+        [HttpPost("RejectPayment")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RejectPayment(int paymentId, string? note)
         {
             var adminId = _userManager.GetUserId(User) ?? "admin";
 
-
-            await _paymentWorkflow.RejectAsync(new ReviewPaymentRequest
+            try
             {
-                PaymentId = paymentId,
-                AdminId = adminId,
-                Note = note
-            });
+                await _paymentWorkflow.RejectAsync(new ReviewPaymentRequest
+                {
+                    PaymentId = paymentId,
+                    AdminId = adminId,
+                    Note = note
+                });
+                TempData["Message"] = "Payment rejected successfully.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
 
             return RedirectToAction(nameof(PendingPayments));
         }
+
+        // ✅ Reviewed cases
+        [HttpGet("ReviewedCases")]
         public async Task<IActionResult> ReviewedCases()
         {
             var cases = await _db.DonationCases
@@ -130,6 +199,5 @@ namespace DonationManagementSystem.Web.Controllers
 
             return View(cases);
         }
-
     }
 }

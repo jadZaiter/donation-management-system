@@ -13,6 +13,9 @@ namespace DonationManagementSystem.Application.Common.Interfaces
         IRepository<Donation> Donations { get; }
         IRepository<Payment> Payments { get; }
         IRepository<Comment> Comments { get; }
+        IRepository<Notification> Notifications { get; } // ✅ NEW
+        IRepository<Category> Categories { get; } // ✅ NEW
+        IRepository<Tag> Tags { get; } // ✅ NEW
 
         Task<int> SaveChangesAsync(CancellationToken ct = default);
     }
